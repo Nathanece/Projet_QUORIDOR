@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.29)
+project(Code_QUORIDOR C)
+
+set(CMAKE_C_STANDARD 23)
+
+add_executable(Quoridor
+        "codes source/menu.c"
+        "headers/joueur.h")
