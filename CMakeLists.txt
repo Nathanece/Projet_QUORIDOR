@@ -7,4 +7,6 @@ add_executable(Quoridor
         "codes source/menu.c"
         "headers/joueur.h"
         "codes source/plateau.c"
-        headers/plateau.h)
+        headers/plateau.h
+        "codes source/joueur.c"
+        main.c)
