@@ -5,6 +5,7 @@
 typedef struct {
     char nom[pseudo]; //pseudo du joueur
     int etat; //0 pour joueur, 1 pour IA
+    char pion; //Caractère pouvant être semis graphique
     int barriere; //Sa valeur initiale dépend du nombre de joueurs
     int coordonnee_x, coordonnee_y;
     int score;

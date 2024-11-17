@@ -38,6 +38,12 @@ void initialisation_joueurs() {
             scanf(" %d", &joueur[i].etat);
         } while (joueur[i].etat != 0 && joueur[i].etat != 1);
 
+        //Choix du pion
+        do {
+            printf("\n Choisissez un pion");
+            scanf(" %c", &joueur[i].pion);
+        } while(joueur[i].pion != ' '); //Sinon le pion n'est pas visible
+
         //Initialisation du nombre de barrières
         joueur[i].barriere = (nb_joueurs == 2)? 10 : 5;
 

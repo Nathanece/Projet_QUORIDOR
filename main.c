@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "headers/joueur.h"
 
 int main() {
