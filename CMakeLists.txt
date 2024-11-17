@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 23)
 
 add_executable(Quoridor
         "codes source/menu.c"
-        "headers/joueur.h")
+        "headers/joueur.h"
+        "codes source/plateau.c"
+        headers/plateau.h)

@@ -2,17 +2,15 @@
 #define JOUEUR1_H
 
 #define coordonnees 2
-#define pseudo 20
+#define pseudo 21 //20 cases utiles et une de plus pour le \0
 typedef struct {
-    char nomJ1[pseudo]; //pseudo du joueur
-    int coordonneesJ1[coordonnees]; //(format x, y pour coordonnées)
-    int stock_barriere;
-    int scoreJ1;
-    int etat; //pour savoir si c'est un joueur(on mettra 0) ou un ordinateur(1).
-} sJoueur;
-//Cette structure est identique pour chaques joueurs
-void intialisation();
-/*La fonction initialisation propose à l'utilisateur de choisir le nombre
- *de joueurs et si ces joueurs sont des ordinateurs ou des personnes */
+    char nom[pseudo]; //pseudo du joueur
+    int coordonnee_x, coordonnee_y;
+    int stock_barriere; //Sa valeur initiale dépend du nombre de joueurs
+    int score;
+    int etat; //0 pour joueur, 1 pour IA
+} Joueur; //Structure des joueurs
+
+Joueur joueur[4]; //Peux contenir soit les 2 joueurs, soit les 4
 
 #endif //JOUEUR1_H

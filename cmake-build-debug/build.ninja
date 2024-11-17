@@ -55,6 +55,12 @@ build CMakeFiles/Quoridor.dir/codes_source/menu.c.obj: C_COMPILER__Quoridor_unsc
   OBJECT_DIR = CMakeFiles\Quoridor.dir
   OBJECT_FILE_DIR = CMakeFiles\Quoridor.dir\codes_source
 
+build CMakeFiles/Quoridor.dir/codes_source/plateau.c.obj: C_COMPILER__Quoridor_unscanned_Debug C$:/Users/nathan/Documents/ING1/Informatique/Projet$ de$ groupe$ SEMESTRE$ 1/Code$ QUORIDOR/codes$ source/plateau.c || cmake_object_order_depends_target_Quoridor
+  DEP_FILE = CMakeFiles\Quoridor.dir\codes_source\plateau.c.obj.d
+  FLAGS = -g -std=gnu2x -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Quoridor.dir
+  OBJECT_FILE_DIR = CMakeFiles\Quoridor.dir\codes_source
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Quoridor
@@ -63,7 +69,7 @@ build CMakeFiles/Quoridor.dir/codes_source/menu.c.obj: C_COMPILER__Quoridor_unsc
 #############################################
 # Link the executable Quoridor.exe
 
-build Quoridor.exe: C_EXECUTABLE_LINKER__Quoridor_Debug CMakeFiles/Quoridor.dir/codes_source/menu.c.obj
+build Quoridor.exe: C_EXECUTABLE_LINKER__Quoridor_Debug CMakeFiles/Quoridor.dir/codes_source/menu.c.obj CMakeFiles/Quoridor.dir/codes_source/plateau.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Quoridor.dir
