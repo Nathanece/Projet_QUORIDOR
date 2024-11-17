@@ -17,11 +17,13 @@ void initialisation_joueurs() {
     //Pseudo des joueurs
     for (i = 0; i<nb_joueurs; i++) {
         int identique = 0;
+
         //Pseudo de 20 caratère maximum
         do {
             identique = 0;
             printf("\nJoueur %d, entrez votre pseudo(20 caracteres au maximum):\n", i+1);
             scanf("%s", joueur[i].nom);
+
             //Verification si un pseudo est identique
             for (int j = 0; j < i; j++) {
                 (strcmp(joueur[i].nom, joueur[j].nom) == 0)? identique++ : 0;
@@ -29,10 +31,8 @@ void initialisation_joueurs() {
             if (identique)
                 printf("Ce pseudo est deja prit");
         } while(strlen(joueur[i].nom) > 20 || identique);
-    }
 
-    //Choix de l'état du joueur
-    for (i = 0; i<nb_joueurs; i++) {
+        //Choix de l'état du joueur
         do {
             printf("\n'%s' est une IA ou un humain ?\nRepondez par 1 (humain) ou 0 (IA)\n", joueur[i].nom);
             scanf(" %d", &joueur[i].etat);
@@ -40,5 +40,11 @@ void initialisation_joueurs() {
 
         //Initialisation du nombre de barrières
         joueur[i].barriere = (nb_joueurs == 2)? 10 : 5;
+
+        //Initialisation du score
+        joueur[i].score = 0;
+
+        //Initialisation de ses coordonnées
+
     }
 }
