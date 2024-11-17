@@ -1,5 +1,5 @@
-#ifndef JOUEUR1_H
-#define JOUEUR1_H
+#ifndef JOUEUR_H
+#define JOUEUR_H
 
 #define pseudo 21 //20 cases utiles et une de plus pour le \0
 typedef struct {
@@ -13,4 +13,4 @@ typedef struct {
 
 void initialisation_joueurs();
 
-#endif //JOUEUR1_H
+#endif //JOUEUR_H
