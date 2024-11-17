@@ -24,8 +24,8 @@ int tirage_au_sort(int nb_joueurs) {
 }
 
 //Fait varier le tour des joueurs (de 0 à 3).
-int rotation_joueur(int aleatoire) {
-    return ++aleatoire%4;
+int rotation_joueur(int rotation) {
+    return ++rotation%4;
 }
 
 void deplacer_pion(int tour_joueur, Players joueur[]) {
@@ -60,22 +60,28 @@ void poser_barriere() {
 
 
 //La valeur retournée par rotation_joueur est utilisée à la place de 'tour_joueur'
-int menu_action(int tour_joueur, Players joueur[]) {
+void menu_action(int tour_joueur, Players joueur[]) {
     int action;
+    int fin = 0;
     do {
-        printf("C'est le tour de '%s'\n"
-               "Quelle action voulez vous faire ?\n"
-               "-1 Deplacer son pion\n"
-               "-2 Poser une barriere\n"
-               "-3 Passer son tour\n"
-               "-4 Annuler la derniere action\n", joueur[tour_joueur].nom);
-        scanf(" %d", &action);
-    }while (action < 1 || action > 4);
-    switch(action) {
-        case 1:
-            deplacer_pion(tour_joueur, joueur);
-        break;
-        default:
+        //Choix de l'action selon l'affichage
+        do {
+            printf("C'est le tour de '%s'\n"
+                   "Quelle action voulez vous faire ?\n"
+                   "-1 Deplacer son pion\n"
+                   "-2 Poser une barriere\n"
+                   "-3 Passer son tour\n"
+                   "-4 Annuler la derniere action\n", joueur[tour_joueur].nom);
+            scanf(" %d", &action);
+        }while (action < 1 || action > 4);
+        //L'action réalisée en fonction du choix du joueur
+        switch(action) {
+            case 1: //Deplacement du pion
+                deplacer_pion(tour_joueur, joueur);
             break;
-    }
+            default:
+                break;
+        }
+        tour_joueur = ++tour_joueur%4;
+    }while(fin != 0);
 }
