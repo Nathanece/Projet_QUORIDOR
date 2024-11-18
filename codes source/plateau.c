@@ -3,7 +3,7 @@
 #include "../headers/plateau.h"
 
 void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
-    FILE* fplateau = fopen("plateau.txt", "w");
+    FILE* fplateau = fopen("../plateau.txt", "w");
     if (fplateau == NULL) {
         printf("Erreur\n");
         return;
@@ -20,7 +20,7 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
 }
 
 void chargement_plateau(Players *joueur[], int* nbjoueurs) {
-    FILE* fplateau = fopen("plateau.txt", "r");
+    FILE* fplateau = fopen("../plateau.txt", "r");
     if (fplateau == NULL) {
         printf("Erreur\n");
         return;

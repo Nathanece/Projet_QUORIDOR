@@ -1,7 +1,7 @@
 #include "headers/joueur.h"
 #include "headers/menu.h"
 #include "headers/plateau.h"
-
+#include <stdio.h>
 int main() {
     int nb_joueurs;
     Players joueur[4];//La structure de chacun des joueurs sera dans ce tableau
