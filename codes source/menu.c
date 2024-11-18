@@ -38,16 +38,16 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
     } while(deplacement < 0 || deplacement > 4);
     switch(deplacement) {
         case 1: //Aller en haut
-            joueur[tour_joueur].coordonnee_y++;
+            joueur[tour_joueur].coord_y++;
         break;
         case 2: //Aller en bas
-            joueur[tour_joueur].coordonnee_y--;
+            joueur[tour_joueur].coord_y--;
         break;
         case 3: //Aller a gauche
-            joueur[tour_joueur].coordonnee_x--;
+            joueur[tour_joueur].coord_x--;
         break;
         case 4: //Aller a droite
-            joueur[tour_joueur].coordonnee_x++;
+            joueur[tour_joueur].coord_x++;
         break;
         default:
             break;

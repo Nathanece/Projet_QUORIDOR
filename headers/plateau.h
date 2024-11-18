@@ -2,6 +2,6 @@
 #define PLATEAU_H
 #define TAILLE_PLATEAU 9
 
-void affichage_plateau();
+int affichage_plateau();
 
 #endif //PLATEAU_H
