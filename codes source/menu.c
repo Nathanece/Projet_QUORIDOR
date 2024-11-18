@@ -3,6 +3,7 @@
 #include <time.h>
 #include "../headers/menu.h"
 #include "../headers/joueur.h"
+#include "../headers/plateau.h"
 
 int menu() {
     int choix;
@@ -21,11 +22,6 @@ int menu() {
 int tirage_au_sort(int nb_joueurs) {
     srand(time(NULL));
     return rand() % nb_joueurs + 1; //Indique quel joueur commence
-}
-
-//Fait varier le tour des joueurs (de 0 à 3).
-int rotation_joueur(int rotation) {
-    return ++rotation%4;
 }
 
 void deplacer_pion(int tour_joueur, Players joueur[]) {
@@ -60,7 +56,7 @@ void poser_barriere() {
 
 
 //La valeur retournée par rotation_joueur est utilisée à la place de 'tour_joueur'
-void menu_action(int tour_joueur, Players joueur[]) {
+void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
     int action;
     int fin = 0;
     do {
@@ -82,6 +78,8 @@ void menu_action(int tour_joueur, Players joueur[]) {
             default:
                 break;
         }
+        sauvegarde_plateau(joueur, nb_joueurs);
+        //Permet de changer de tour (de 0 à 3)
         tour_joueur = ++tour_joueur%4;
-    }while(fin != 0);
+    }while(1);
 }

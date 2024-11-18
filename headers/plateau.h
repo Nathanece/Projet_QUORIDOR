@@ -1,7 +1,8 @@
 #ifndef PLATEAU_H
 #define PLATEAU_H
-#define TAILLE_PLATEAU 9
 
-int affichage_plateau();
+void sauvegarde_plateau(Players joueur[], int nbjoueurs);
+void chargement_plateau(Players *joueur[], int* nbjoueurs);
+
 
 #endif //PLATEAU_H
