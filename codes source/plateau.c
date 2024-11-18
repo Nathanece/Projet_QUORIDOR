@@ -31,7 +31,7 @@ void chargement_plateau(Players *joueur[], int* nbjoueurs) {
 
     //Lecture des informations et assignation des données à chaques joueurs
     for (int i = 0; i < *nbjoueurs; i++) {
-        fscanf("%s %d %c %d %d %d %d \n",
+        fscanf(fplateau, "%s %d %c %d %d %d %d \n",
         joueur[i]->nom, joueur[i]->etat, joueur[i]->pion, joueur[i]->barriere, joueur[i]->coord_x, joueur[i]->coord_y, joueur[i]->score);
     }
         fclose(fplateau);

@@ -78,6 +78,7 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
             default:
                 break;
         }
+        //Sauvegarde des informations du joueur après sont action
         sauvegarde_plateau(joueur, nb_joueurs);
         //Permet de changer de tour (de 0 à 3)
         tour_joueur = ++tour_joueur%4;
