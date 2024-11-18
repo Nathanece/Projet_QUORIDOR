@@ -2,20 +2,18 @@
 #include <string.h>
 #include "../headers/joueur.h"
 
-void initialisation_joueurs() {
+void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
     //déclaration des variables
-    Players joueur[4]; //La structure de chacun des joueurs sera dans ce tableau
-    int nb_joueurs;
     int i; //Pour les boucles
 
     //Choix du nombre de joueurs (blindé pour avoir 2 ou 4 comme valeur)
     do{
         printf("Entrez le nombre de joueurs (2 ou 4 joueurs):\n");
-        scanf("%d", &nb_joueurs);
-    }while(nb_joueurs != 2 && nb_joueurs != 4);
+        scanf("%d", nb_joueurs);
+    }while(*nb_joueurs != 2 && *nb_joueurs != 4);
 
     //Pseudo des joueurs
-    for (i = 0; i<nb_joueurs; i++) {
+    for (i = 0; i < *nb_joueurs; i++) {
         int identique = 0;
 
         //Pseudo de 20 caratère maximum
@@ -43,7 +41,7 @@ void initialisation_joueurs() {
         scanf(" %c", &joueur[i].pion);
 
         //Initialisation du nombre de barrières
-        joueur[i].barriere = (nb_joueurs == 2)? 10 : 5;
+        joueur[i].barriere = (*nb_joueurs == 2)? 10 : 5;
 
         //Initialisation du score
         joueur[i].score = 0;

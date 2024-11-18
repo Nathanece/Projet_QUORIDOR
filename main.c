@@ -3,6 +3,8 @@
 #include "headers/plateau.h"
 
 int main() {
-    initialisation_joueurs();
+    int nb_joueurs;
+    Players joueur[4];//La structure de chacun des joueurs sera dans ce tableau
+    initialisation_joueurs(joueur, &nb_joueurs);
     return 0;
 }
