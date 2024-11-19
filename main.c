@@ -3,17 +3,6 @@
 #include "headers/plateau.h"
 #include <stdio.h>
 
-/*ORGANISATION DES COULEURS PAR JOUEUR ET POUR LE PLATEAU
- *J1 : BLEU
- *J2 : ROUGE
- *J3 : JAUNE
- *J4 : VERT
- *CASES : BLANC
- *BARRIERE : NOIR
- *ABSENCE DE BARRIERE : GRIS
- */
-
-
 int main() {
     int nb_joueurs = 0;
     Players joueur[4];//La structure de chacun des joueurs sera dans ce tableau

@@ -61,7 +61,7 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
             case 2:
                 joueur[i].coord_x = 1;
                 joueur[i].coord_y = 5;
-                joueur[i].couleur  = 14; //Couleur jaune
+                joueur[i].couleur  = 5; //Couleu violet
             break;
             case 3:
                 joueur[i].coord_x = 9;
