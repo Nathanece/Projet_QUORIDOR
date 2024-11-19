@@ -5,25 +5,13 @@
 #include "../headers/joueur.h"
 #include "../headers/plateau.h"
 
-int menu() {
-    int choix;
-    do {
-        printf("Que voulez vous faire ?\n"
-               "-1 Lancer une nouvelle partie\n"
-               "-2 Reprendre une partie sauvegardée\n"
-               "-3 Afficher l'aide\n"
-               "-4 Afficher le score des joueurs\n"
-               "-5 Quitter le jeu\n");
-        scanf(" %d", &choix);
-    } while (choix < 1 || choix > 6);
-    return choix;
-}
-
+//Fonction permettant de choisir le tour du premier joueur au hasard
 int tirage_au_sort(int nb_joueurs) {
     srand(time(NULL));
     return rand() % nb_joueurs + 1; //Indique quel joueur commence
 }
 
+//FONCTION de déplacement du pion
 void deplacer_pion(int tour_joueur, Players joueur[]) {
     int deplacement;
     //Choix du déplacement du pion
@@ -55,7 +43,7 @@ void poser_barriere() {
 }
 
 
-//La valeur retournée par rotation_joueur est utilisée à la place de 'tour_joueur'
+//Menu affichant les actions possibles.
 void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
     int action;
     int fin = 0;
@@ -78,9 +66,26 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
             default:
                 break;
         }
+
         //Sauvegarde des informations du joueur après sont action
         sauvegarde_plateau(joueur, nb_joueurs);
+
         //Permet de changer de tour (de 0 à 3)
         tour_joueur = ++tour_joueur%4;
     }while(1);
+}
+
+//MENU DE DEPART. Il est affiché au tout début du jeu
+int menu() {
+    int choix;
+    do {
+        printf("Que voulez vous faire ?\n"
+               "-1 Lancer une nouvelle partie\n"
+               "-2 Reprendre une partie sauvegardée\n"
+               "-3 Afficher l'aide\n"
+               "-4 Afficher le score des joueurs\n"
+               "-5 Quitter le jeu\n");
+        scanf(" %d", &choix);
+    } while (choix < 1 || choix > 6);
+    return choix;
 }
