@@ -51,18 +51,22 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
             case 0:
                 joueur[i].coord_x = 5;
                 joueur[i].coord_y = 1; //On respecte la notation du plateau. La coordonnée minimale est 1.
+                joueur[i].couleur  = 1; //Couleur bleu
             break;
             case 1:
                 joueur[i].coord_x = 5;
                 joueur[i].coord_y = 9; //La coordonnée maximale du plateau est 9.
+                joueur[i].couleur  = 4; //Couleur rouge
                 break;
             case 2:
                 joueur[i].coord_x = 1;
                 joueur[i].coord_y = 5;
+                joueur[i].couleur  = 14; //Couleur jaune
             break;
             case 3:
                 joueur[i].coord_x = 9;
                 joueur[i].coord_y = 5;
+                joueur[i].couleur  = 2; //Couleur vert
             break;
             default:
                 printf("Erreur veuillez relancer le programme");
