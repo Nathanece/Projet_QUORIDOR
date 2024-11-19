@@ -37,7 +37,7 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
         } while (joueur[i].etat != 0 && joueur[i].etat != 1);
 
         //Choix du pion
-        printf("\n Choisissez un pion\n");
+        printf("\nChoisissez un pion\n");
         scanf(" %c", &joueur[i].pion);
 
         //Initialisation du nombre de barrières

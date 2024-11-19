@@ -54,7 +54,8 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
     do {
         //Choix de l'action selon l'affichage
         do {
-            printf("C'est le tour de '%s'\n"
+            affichage_plateau();
+            printf("\nC'est le tour de '%s'\n"
                    "Quelle action voulez vous faire ?\n"
                    "-1 Deplacer son pion\n"
                    "-2 Poser une barriere\n"
