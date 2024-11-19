@@ -54,12 +54,17 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
     do {
         //Choix de l'action selon l'affichage
         do {
+            //Sauvegarde des informations du jeu (positions, joueurs, ...)
+            sauvegarde_plateau(joueur, nb_joueurs);
+
+            //Affichage du tableau
             affichage_plateau(nb_joueurs, joueur);
-            printf("\nC'est le tour de");
+
             //Affichage du pseudo du joueur avec sa couleur associée
+            printf("\nC'est le tour de");
             Color(joueur[tour_joueur].couleur, 0);
             printf(" %s\n", joueur[tour_joueur].nom);
-            //Remise de la couleur originale
+            //Remise à la couleur originale
             Color(15, 0);
             printf("Quelle action voulez vous faire ?\n"
                    "-1 Deplacer son pion\n"
@@ -77,10 +82,7 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
                 break;
         }
 
-        //Sauvegarde des informations du joueur après sont action
-        sauvegarde_plateau(joueur, nb_joueurs);
-
-        //Permet de changer de tour (de 0 à 3)
+        //Permet de changer de tour (en fonction du nombre de joueurs
         tour_joueur = ++tour_joueur%nb_joueurs;
     }while(1);
 }
