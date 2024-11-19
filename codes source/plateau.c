@@ -102,7 +102,8 @@ void affichage_plateau(int nb_joueurs, Players joueur[]) {
     }
     //Affichage des pions
     for (int i = 0; i < nb_joueurs; i++) {
-        gotoligcol(joueur[i].coord_y * hauteur_case, joueur[i].coord_x * largeur_case);
+        //Il semble que nous devons mettre "-1" pour la coord x sinon le pion est légèrement décalé
+        gotoligcol(joueur[i].coord_y * hauteur_case, joueur[i].coord_x * largeur_case - 1);
         Color(joueur[i].couleur, 15);
         printf("%c", joueur[i].pion);
 
