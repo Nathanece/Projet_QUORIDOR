@@ -8,7 +8,7 @@
 //Fonction permettant de choisir le tour du premier joueur au hasard
 int tirage_au_sort(int nb_joueurs) {
     srand(time(NULL));
-    return rand() % nb_joueurs + 1; //Indique quel joueur commence
+    return rand() % nb_joueurs; //Indique quel joueur commence
 }
 
 //FONCTION de déplacement du pion
@@ -19,7 +19,9 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
         printf("Ou voulez vous aller ?\n"
                "-1 'Haut'\n-2 'Bas'\n-3 'Gauche'\n-4 'Droite'\n");
         scanf(" %d", &deplacement);
+        //Blindage de la saisie
     } while(deplacement < 0 || deplacement > 4);
+    //Cas de déplacement
     switch(deplacement) {
         case 1: //Aller en haut
             joueur[tour_joueur].coord_y++;
@@ -38,7 +40,9 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
     }
 }
 
-void poser_barriere() {
+//Fonction stockant les barrières placées
+//ATTENTION, UTILISER LES LETTRES POUR PLACER LES BARRIERES COMME INDQUE DANS LE LIVRABLE
+void poser_barriere(int tab_barriere[20][4]) {
 
 }
 
@@ -71,7 +75,7 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
         sauvegarde_plateau(joueur, nb_joueurs);
 
         //Permet de changer de tour (de 0 à 3)
-        tour_joueur = ++tour_joueur%4;
+        tour_joueur = ++tour_joueur%nb_joueurs;
     }while(1);
 }
 
@@ -81,7 +85,7 @@ int menu() {
     do {
         printf("Que voulez vous faire ?\n"
                "-1 Lancer une nouvelle partie\n"
-               "-2 Reprendre une partie sauvegardée\n"
+               "-2 Reprendre une partie sauvegardee\n"
                "-3 Afficher l'aide\n"
                "-4 Afficher le score des joueurs\n"
                "-5 Quitter le jeu\n");

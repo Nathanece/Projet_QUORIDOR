@@ -46,7 +46,27 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
         //Initialisation du score
         joueur[i].score = 0;
 
-        //Initialisation de ses coordonnées
-
+        //Initialisation de ses coordonnées en fonction du nombre de joueurs
+        switch(i) {
+            case 0:
+                joueur[i].coord_x = 5;
+                joueur[i].coord_y = 1; //On respecte la notation du plateau. La coordonnée minimale est 1.
+            break;
+            case 1:
+                joueur[i].coord_x = 5;
+                joueur[i].coord_y = 9; //La coordonnée maximale du plateau est 9.
+                break;
+            case 2:
+                joueur[i].coord_x = 1;
+                joueur[i].coord_y = 5;
+            break;
+            case 3:
+                joueur[i].coord_x = 9;
+                joueur[i].coord_y = 5;
+            break;
+            default:
+                printf("Erreur veuillez relancer le programme");
+            break;
+        }
     }
 }
