@@ -23,11 +23,11 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
     } while(deplacement < 0 || deplacement > 4);
     //Cas de déplacement
     switch(deplacement) {
-        case 1: //Aller en haut
-            joueur[tour_joueur].coord_y++;
-        break;
-        case 2: //Aller en bas
+        case 1: //Aller en haut (il semble que je doive faire diminuer cette valeur)
             joueur[tour_joueur].coord_y--;
+        break;
+        case 2: //Aller en bas (même remarque que haut à l'inverse)
+            joueur[tour_joueur].coord_y++;
         break;
         case 3: //Aller a gauche
             joueur[tour_joueur].coord_x--;
@@ -54,13 +54,18 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
     do {
         //Choix de l'action selon l'affichage
         do {
-            affichage_plateau();
-            printf("\nC'est le tour de '%s'\n"
-                   "Quelle action voulez vous faire ?\n"
+            affichage_plateau(nb_joueurs, joueur);
+            printf("\nC'est le tour de");
+            //Affichage du pseudo du joueur avec sa couleur associée
+            Color(joueur[tour_joueur].couleur, 0);
+            printf(" %s\n", joueur[tour_joueur].nom);
+            //Remise de la couleur originale
+            Color(15, 0);
+            printf("Quelle action voulez vous faire ?\n"
                    "-1 Deplacer son pion\n"
                    "-2 Poser une barriere\n"
                    "-3 Passer son tour\n"
-                   "-4 Annuler la derniere action\n", joueur[tour_joueur].nom);
+                   "-4 Annuler la derniere action\n");
             scanf(" %d", &action);
         }while (action < 1 || action > 4);
         //L'action réalisée en fonction du choix du joueur
