@@ -39,8 +39,8 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
 
     //Enregistrement des infomations de chaque joueur
     for (int i = 0; i < nbjoueurs; i++) {
-        fprintf(fplateau, "%s %d %c %d %d %d %d \n",
-            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].coord_x, joueur[i].coord_y, joueur[i].score);
+        fprintf(fplateau, "%s %d %c %d %d %d %d %d \n",
+            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].coord_x, joueur[i].coord_y, joueur[i].score, joueur[i].couleur);
     }
     fclose(fplateau);
 }
@@ -57,15 +57,17 @@ void chargement_plateau(Players joueur[], int* nbjoueurs) {
 
     //Lecture des informations et assignation des données à chaques joueurs
     for (int i = 0; i < *nbjoueurs; i++) {
-        fscanf(fplateau, "%s %d %c %d %d %d %d \n",
-        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score);
+        fscanf(fplateau, "%s %d %c %d %d %d %d %d \n",
+        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score, joueur[i].couleur);
     }
         fclose(fplateau);
 }
 
 
 //Affichage du plateau
-void affichage_plateau() {
+void affichage_plateau(int nb_joueurs, Players joueur[]) {
+    int largeur_case = 4;
+    int hauteur_case = 2;
     //Permet de réinitialiser les lignes (pour mettre le curseur à 0))
     system("cls");
 
@@ -77,18 +79,18 @@ void affichage_plateau() {
 
     // Affichage des chiffres à gauche (1 à 9)
     for (int i = 0; i < TAILLE_TABLEAU; i++) {
-        gotoligcol((i * 2) + 2, 0);
+        gotoligcol((i * hauteur_case) + hauteur_case, 0);
         printf("%d", i + 1);
     }
 
     //Affichage du plateau
     //TAILLE_TABLEAU * 2 car on a un espace entre chaques chiffres
-    for (int i = 0; i <= TAILLE_TABLEAU*2; i++) {
+    for (int i = 0; i <= TAILLE_TABLEAU*hauteur_case; i++) {
         gotoligcol(i+1, 1);
         //TAILLE_TABLEAU * 4 car on a 3 espaces entre chaques lettres (donc 4 places par cases)
-        for (int j = 0; j <= TAILLE_TABLEAU*4; j++) {
+        for (int j = 0; j <= TAILLE_TABLEAU*largeur_case; j++) {
             //Si on arrive sur une ligne entre les chiffres ou lettres, c'est une ligne pour barriere
-            if ((i%2 == 0) || (j%4 == 0)) {
+            if ((i % hauteur_case == 0) || (j % largeur_case == 0)) {
                 Color(0, 8);
                 printf(" ");
             }
@@ -97,6 +99,13 @@ void affichage_plateau() {
                 printf(" ");
             }
         }
+    }
+    //Affichage des pions
+    for (int i = 0; i < nb_joueurs; i++) {
+        gotoligcol(2 + joueur[i].coord_y * hauteur_case, 4 + joueur[i].coord_x * largeur_case);
+        Color(joueur[i].couleur, 15);
+        printf("%c", joueur[i].pion);
+
     }
     //Remettre les couleurs d'origine
     Color(15, 0);
