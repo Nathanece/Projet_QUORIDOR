@@ -27,7 +27,7 @@ void gotoligcol(int lig, int col) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), mycoord);
 }
 
-void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
+void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur) {
     FILE* fplateau = fopen("../plateau.txt", "w");
     if (fplateau == NULL) {
         printf("Erreur\n");
@@ -35,7 +35,7 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
     }
 
     //Enregistrement du nombre de joueurs
-    fprintf(fplateau, "%d\n", nbjoueurs);
+    fprintf(fplateau, "%d %d\n", nbjoueurs, tour_joueur);
 
     //Enregistrement des infomations de chaque joueur
     for (int i = 0; i < nbjoueurs; i++) {
@@ -45,7 +45,7 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs) {
     fclose(fplateau);
 }
 
-void chargement_plateau(Players joueur[], int* nbjoueurs) {
+void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur) {
     FILE* fplateau = fopen("../plateau.txt", "r");
     if (fplateau == NULL) {
         printf("Erreur\n");
@@ -53,7 +53,7 @@ void chargement_plateau(Players joueur[], int* nbjoueurs) {
     }
 
     //Lit la valeur enregistrée pour nbjoueur et l'assigne à la variable nbjoueur
-    fscanf(fplateau, "%d\n", nbjoueurs);
+    fscanf(fplateau, "%d %d\n", nbjoueurs, tour_joueur);
 
     //Lecture des informations et assignation des données à chaques joueurs
     for (int i = 0; i < *nbjoueurs; i++) {

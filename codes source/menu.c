@@ -55,7 +55,7 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
         //Choix de l'action selon l'affichage
         do {
             //Sauvegarde des informations du jeu (positions, joueurs, ...)
-            sauvegarde_plateau(joueur, nb_joueurs);
+            sauvegarde_plateau(joueur, nb_joueurs, tour_joueur);
 
             //Affichage du tableau
             affichage_plateau(nb_joueurs, joueur);
