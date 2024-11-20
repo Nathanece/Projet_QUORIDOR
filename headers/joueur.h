@@ -10,7 +10,7 @@ typedef struct {
     int coord_x, coord_y;
     int score;
     int couleur;
-} Players; //Structure des joueurs
+} Players; //Structures des joueurs
 
 
 void initialisation_joueurs(Players joueur[4], int *nb_joueurs);
