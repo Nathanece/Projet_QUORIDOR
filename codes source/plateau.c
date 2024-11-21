@@ -47,7 +47,7 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int co
 
     //Enregistrement des coordonnées de chaques barrieres
     for (int i = 0; i < compteur_barriere; i++) {
-        fprintf(fplateau, "%s %s %c\n",
+        fprintf(fplateau, "%s %s %c \n",
             barriere[i].case1, barriere[i].case2, barriere[i].cote);
     }
     fclose(fplateau);
@@ -73,12 +73,11 @@ void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int 
 
     //Lecture des coordonnées des barrieres
     for (int i = 0; i < *compteur_barriere; i++) {
-        fscanf("%s %s %c \n",
+        fscanf(fplateau, "%s %s %c \n",
             barriere[i].case1, barriere[i].case2, &barriere[i].cote);
     }
         fclose(fplateau);
 }
-
 
 //Affichage du plateau
 void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, Barriere_plateau barriere[]) {
