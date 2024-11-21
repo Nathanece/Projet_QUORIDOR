@@ -47,7 +47,8 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int co
 
     //Enregistrement des coordonnées de chaques barrieres
     for (int i = 0; i < compteur_barriere; i++) {
-        fprintf(fplateau, "%s %s %c \n", barriere[i].case1, barriere[i].case2, barriere[i].cote);
+        fprintf(fplateau, "%s %s %c\n",
+            barriere[i].case1, barriere[i].case2, barriere[i].cote);
     }
     fclose(fplateau);
 }
@@ -124,12 +125,12 @@ void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, 
     }
     //Affichage des barrieres
     for (int i = 0; i < compteur_barriere; i++) {
-        gotoligcol((barriere[i].case1[1] - '1') * 2,
+        gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
                   1 + (barriere[i].case1[0] - 'A' + 1) * 4);
         Color(0, 8);
         printf("|");
         Color(15, 0);
-        gotoligcol((barriere[i].case2[1] - '1') * 2,
+        gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
                    1 + (barriere[i].case2[0] - 'A' + 1) * 4);
         Color(0, 8);
         printf("|");
@@ -138,6 +139,9 @@ void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, 
         Color(15, 0);
     }
 
+    for (int i = 0; i < compteur_barriere; i++) {
+        printf("%s %s %c", barriere[i].case1, barriere[i].case2, barriere[i].cote);
+    }
     //Mettre le curseur en dessous du tableau affiché
     gotoligcol((TAILLE_TABLEAU + 1)*hauteur_case, 0);
 }

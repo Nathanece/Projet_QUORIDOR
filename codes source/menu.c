@@ -42,19 +42,19 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
 
 //Fonction stockant les barrières placées
 //ATTENTION, UTILISER LES LETTRES POUR PLACER LES BARRIERES COMME L'EXEMPLE DANS LE LIVRABLE
-void poser_barriere(Barriere_plateau barrieres[20], Players joueur, int *compteur_barriere) {
+void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compteur_barriere, int tour_joueur) {
     // Récupération de la première case
     printf("Indiquez l'endroit ou poser la barriere.\n");
     do {
         printf("Case 1 (format B6, E9 ...) : ");
-        scanf(" %s", barrieres[*compteur_barriere].case1); // Lit exactement 2 caractères
+        scanf(" %2s", barrieres[*compteur_barriere].case1); // Lit les 2 caractères de la case (ex : E4)
     } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'Z' ||
              barrieres[*compteur_barriere].case1[1] < '1' || barrieres[*compteur_barriere].case1[1] > '9');
 
     // Récupération de la deuxième case
     do {
         printf("Case 2 (format : B6, E9 ...) : ");
-        scanf(" %s", barrieres[*compteur_barriere].case2); // Lit exactement 2 caractères
+        scanf(" %2s", barrieres[*compteur_barriere].case2); // Lit les deux caractères de la case (ex : E4)
     } while ((barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] && // Même colonne ou ...
               barrieres[*compteur_barriere].case2[1] != barrieres[*compteur_barriere].case1[1]) || // ... même ligne
              abs(barrieres[*compteur_barriere].case2[0] - barrieres[*compteur_barriere].case1[0]) +
@@ -76,8 +76,9 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur, int *compteu
     }
 
     // Mise à jour du compteur et des barrières du joueur
-    joueur.barriere--;
+    joueur[tour_joueur].barriere--;
     (*compteur_barriere)++;
+    printf("%s %s %c", barrieres[*compteur_barriere].case1, barrieres[*compteur_barriere].case2, barrieres[*compteur_barriere].cote);
 }
 
 
@@ -115,7 +116,7 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_pla
                 deplacer_pion(tour_joueur, joueur);
             break;
             case 2:
-                poser_barriere(barrieres, joueur[tour_joueur], compteur_barriere);
+                poser_barriere(barrieres, joueur, compteur_barriere, tour_joueur);
             default:
                 break;
         }
