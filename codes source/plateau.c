@@ -125,27 +125,37 @@ void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, 
 
     }
     //Affichage des barrieres
+    int decalage;
     for (int i = 0; i < compteur_barriere; i++) {
+        decalage = 0;
         if (barriere[i].case1[0] == barriere[i].case2[0]) {
+            if (barriere[i].cote == 'g')
+                decalage--;
+            else
+                decalage++;
             gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
-                      1 + (barriere[i].case1[0] - 'A' + 1) * 4);
+                      1 + (barriere[i].case1[0] - 'A' + 1) * 4 - 2 + 2*decalage);
             Color(0, 8);
             printf("|");
             Color(15, 0);
             gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
-                       1 + (barriere[i].case2[0] - 'A' + 1) * 4);
+                       1 + (barriere[i].case2[0] - 'A' + 1) * 4 - 2 + 2*decalage);
             Color(0, 8);
             printf("|");
             Color(15, 0);
             //Remettre les couleurs d'origine
             Color(15, 0);
         } else {
-            gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
+            if (barriere[i].cote == 'h')
+                decalage--;
+            else
+                decalage++;
+            gotoligcol((barriere[i].case1[1] - '1') * 2 + 2 + decalage,
                       (barriere[i].case1[0] - 'A' + 1) * 4 - 2);
             Color(0, 8);
             printf("---");
             Color(15, 0);
-            gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
+            gotoligcol((barriere[i].case2[1] - '1') * 2 + 2 + decalage,
                        (barriere[i].case2[0] - 'A' + 1) * 4 - 2);
             Color(0, 8);
             printf("---");
