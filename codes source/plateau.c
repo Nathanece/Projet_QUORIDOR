@@ -69,11 +69,12 @@ void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int 
         joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score, &joueur[i].couleur);
     }
     //Lecture du nombre de barrieres
-    fscanf(fplateau, "%d", compteur_barriere);
+    fscanf(fplateau, "%d \n", compteur_barriere);
 
     //Lecture des coordonnées des barrieres
     for (int i = 0; i < *compteur_barriere; i++) {
-        fscanf("%s %s %c", barriere[i].case1, barriere[i].case2, &barriere[i].cote);
+        fscanf("%s %s %c \n",
+            barriere[i].case1, barriere[i].case2, &barriere[i].cote);
     }
         fclose(fplateau);
 }
@@ -125,23 +126,33 @@ void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, 
     }
     //Affichage des barrieres
     for (int i = 0; i < compteur_barriere; i++) {
-        gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
-                  1 + (barriere[i].case1[0] - 'A' + 1) * 4);
-        Color(0, 8);
-        printf("|");
-        Color(15, 0);
-        gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
-                   1 + (barriere[i].case2[0] - 'A' + 1) * 4);
-        Color(0, 8);
-        printf("|");
-        Color(15, 0);
-        //Remettre les couleurs d'origine
-        Color(15, 0);
+        if (barriere[i].case1[0] == barriere[i].case2[0]) {
+            gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
+                      1 + (barriere[i].case1[0] - 'A' + 1) * 4);
+            Color(0, 8);
+            printf("|");
+            Color(15, 0);
+            gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
+                       1 + (barriere[i].case2[0] - 'A' + 1) * 4);
+            Color(0, 8);
+            printf("|");
+            Color(15, 0);
+            //Remettre les couleurs d'origine
+            Color(15, 0);
+        } else {
+            gotoligcol((barriere[i].case1[1] - '1') * 2 + 2,
+                      (barriere[i].case1[0] - 'A' + 1) * 4 - 2);
+            Color(0, 8);
+            printf("---");
+            Color(15, 0);
+            gotoligcol((barriere[i].case2[1] - '1') * 2 + 2,
+                       (barriere[i].case2[0] - 'A' + 1) * 4 - 2);
+            Color(0, 8);
+            printf("---");
+            Color(15, 0);
+        }
     }
 
-    for (int i = 0; i < compteur_barriere; i++) {
-        printf("%s %s %c", barriere[i].case1, barriere[i].case2, barriere[i].cote);
-    }
     //Mettre le curseur en dessous du tableau affiché
     gotoligcol((TAILLE_TABLEAU + 1)*hauteur_case, 0);
 }
