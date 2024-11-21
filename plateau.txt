@@ -1,5 +1,6 @@
-4
-abby 1 @ 5 5 1 0 1 
-baby 1 % 5 5 9 0 4 
-Pedro 1 # 5 1 5 0 5 
-zaya 1 & 5 8 6 0 2 
+2 1 
+ab 1 1 10 5 1 0 1 
+bb 1 2 10 5 9 0 4 
+2 
+E2E3gD5D6gR E3gD5D6gR g 
+D5D6gR D6gR g 

@@ -41,25 +41,61 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
 }
 
 //Fonction stockant les barrières placées
-//ATTENTION, UTILISER LES LETTRES POUR PLACER LES BARRIERES COMME INDQUE DANS LE LIVRABLE
-void poser_barriere(int tab_barriere[20][4]) {
+//ATTENTION, UTILISER LES LETTRES POUR PLACER LES BARRIERES COMME L'EXEMPLE DANS LE LIVRABLE
+void poser_barriere(Barriere_plateau barrieres[20], Players joueur, int *compteur_barriere) {
+    // Récupération de la première case
+    printf("Indiquez l'endroit ou poser la barriere.\n");
+    do {
+        printf("Case 1 (format B6, E9 ...) : ");
+        scanf(" %s", barrieres[*compteur_barriere].case1); // Lit exactement 2 caractères
+    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'Z' ||
+             barrieres[*compteur_barriere].case1[1] < '1' || barrieres[*compteur_barriere].case1[1] > '9');
 
+    // Récupération de la deuxième case
+    do {
+        printf("Case 2 (format : B6, E9 ...) : ");
+        scanf(" %s", barrieres[*compteur_barriere].case2); // Lit exactement 2 caractères
+    } while ((barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] && // Même colonne ou ...
+              barrieres[*compteur_barriere].case2[1] != barrieres[*compteur_barriere].case1[1]) || // ... même ligne
+             abs(barrieres[*compteur_barriere].case2[0] - barrieres[*compteur_barriere].case1[0]) +
+             abs(barrieres[*compteur_barriere].case2[1] - barrieres[*compteur_barriere].case1[1]) != 1);
+
+    // Choix du côté
+    if (barrieres[*compteur_barriere].case1[0] == barrieres[*compteur_barriere].case2[0]) {
+        // Même colonne
+        do {
+            printf("Cote ('g' gauche, 'd' droit) : ");
+            scanf(" %c", &barrieres[*compteur_barriere].cote);
+        } while (barrieres[*compteur_barriere].cote != 'g' && barrieres[*compteur_barriere].cote != 'd');
+    } else {
+        // Même ligne
+        do {
+            printf("Cote ('h' haut, 'b' bas) : ");
+            scanf(" %c", &barrieres[*compteur_barriere].cote);
+        } while (barrieres[*compteur_barriere].cote != 'h' && barrieres[*compteur_barriere].cote != 'b');
+    }
+
+    // Mise à jour du compteur et des barrières du joueur
+    joueur.barriere--;
+    (*compteur_barriere)++;
 }
 
 
 //Menu affichant les actions possibles.
-void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
+void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_plateau barrieres[], int *compteur_barriere) {
     int action;
     int fin = 0;
     do {
         //Choix de l'action selon l'affichage
         do {
             //Sauvegarde des informations du jeu (positions, joueurs, ...)
-            sauvegarde_plateau(joueur, nb_joueurs, tour_joueur);
+            sauvegarde_plateau(joueur, nb_joueurs, tour_joueur, *compteur_barriere, barrieres);
 
             //Affichage du tableau
-            affichage_plateau(nb_joueurs, joueur);
+            affichage_plateau(nb_joueurs, joueur, *compteur_barriere, barrieres);
 
+            //Initialisation couleur
+            Color(15, 0);
             //Affichage du pseudo du joueur avec sa couleur associée
             printf("\nC'est le tour de");
             Color(joueur[tour_joueur].couleur, 0);
@@ -78,6 +114,8 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs) {
             case 1: //Deplacement du pion
                 deplacer_pion(tour_joueur, joueur);
             break;
+            case 2:
+                poser_barriere(barrieres, joueur[tour_joueur], compteur_barriere);
             default:
                 break;
         }
