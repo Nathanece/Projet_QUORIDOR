@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/nathan/Documents/ING1/Informatique/Projet de groupe SEMESTRE 1/Code QUORIDOR
+# Install script for directory: C:/Hamza/Projet_QUORIDOR
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/nathan/Documents/ING1/Informatique/Projet de groupe SEMESTRE 1/Code QUORIDOR/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Hamza/Projet_QUORIDOR/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
