@@ -97,7 +97,6 @@ void sauvegarder_scores(Players joueur[], int nb_joueurs) {
 }
 
 
-
 void charger_scores(Players joueur[], int nb_joueurs) {
     // Ouverture du fichier en mode lecture
     FILE *fichier = fopen("../scores.txt", "r");
@@ -126,3 +125,14 @@ void charger_scores(Players joueur[], int nb_joueurs) {
     fclose(fichier);
     printf("Scores chargés avec succès.\n");
 }
+
+
+void mettre_a_jour_scores(Players joueur[], int nb_joueurs, int gagnant) {
+    if (gagnant >= 0) {
+        printf("Le gagnant est %s !\n", joueur[gagnant].nom);
+        joueur[gagnant].score += 5;
+    } else {
+        printf("Partie bloquée : aucun point attribué.\n");
+    }
+}
+

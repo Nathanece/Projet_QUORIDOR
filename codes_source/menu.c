@@ -161,3 +161,31 @@ int menu() {
     } while (choix < 1 || choix > 6);
     return choix;
 }
+
+
+void afficher_scores() {
+    // Ouverture du fichier contenant les scores en mode lecture
+    FILE *fichier = fopen("../scores.txt", "r");
+
+    // Vérifie si le fichier est accessible
+    if (fichier == NULL) {
+        printf("Aucun score enregistré pour le moment.\n");
+        return;
+    }
+
+    // Variables temporaires pour stocker les données lues
+    char nom_temp[pseudo];
+    int score_temp;
+
+    // Affiche un en-tête pour les scores
+    printf("Scores des joueurs :\n");
+
+    // Lecture des scores ligne par ligne
+    while (fscanf(fichier, "%s %d\n", nom_temp, &score_temp) != EOF) {
+        // Affiche le nom et le score du joueur
+        printf("%s : %d points\n", nom_temp, score_temp);
+    }
+
+    // Fermeture du fichier après lecture
+    fclose(fichier);
+}
