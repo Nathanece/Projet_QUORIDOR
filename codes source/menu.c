@@ -19,6 +19,18 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
         printf("Ou voulez vous aller ?\n"
                "-1 'Haut'\n-2 'Bas'\n-3 'Gauche'\n-4 'Droite'\n");
         scanf(" %d", &deplacement);
+        if(deplacement == 1 && joueur[tour_joueur].coord_y==1) {
+            deplacement=-1;
+        }
+        if(deplacement == 2 && joueur[tour_joueur].coord_y==9) {
+            deplacement=-1;
+        }
+        if(deplacement == 3 && joueur[tour_joueur].coord_x==1) {
+            deplacement=-1;
+        }
+        if(deplacement == 4 && joueur[tour_joueur].coord_x==9) {
+            deplacement=-1;
+        }
         //Blindage de la saisie
     } while(deplacement < 0 || deplacement > 4);
     //Cas de déplacement
@@ -48,7 +60,7 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
     do {
         printf("Case 1 (format B6, E9 ...) : ");
         scanf(" %2s", barrieres[*compteur_barriere].case1); // Lit les 2 caractères de la case (ex : E4)
-    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'Z' ||
+    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'I' ||
              barrieres[*compteur_barriere].case1[1] < '1' || barrieres[*compteur_barriere].case1[1] > '9');
 
     // Récupération de la deuxième case
