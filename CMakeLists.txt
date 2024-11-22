@@ -11,5 +11,6 @@ add_executable(Quoridor
         "codes source/joueur.c"
         main.c
         headers/menu.h
-        "codes source/score"
-        "codes source/score")
+        "codes source/score.c"
+        "codes source/score.c"
+        "codes source/joueur.c")
