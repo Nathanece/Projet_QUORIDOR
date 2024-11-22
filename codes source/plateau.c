@@ -27,6 +27,7 @@ void gotoligcol(int lig, int col) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), mycoord);
 }
 
+//Sauvegarde de l'état de la partie
 void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int compteur_barriere, Barriere_plateau barriere[]) {
     FILE* fplateau = fopen("../plateau.txt", "w");
     if (fplateau == NULL) {
@@ -53,6 +54,7 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int co
     fclose(fplateau);
 }
 
+//Chargement de la sauvegarde
 void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int *compteur_barriere, Barriere_plateau barriere[]) {
     FILE* fplateau = fopen("../plateau.txt", "r");
     if (fplateau == NULL) {

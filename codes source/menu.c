@@ -55,20 +55,21 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
     do {
         printf("Case 2 (format : B6, E9 ...) : ");
         scanf(" %2s", barrieres[*compteur_barriere].case2); // Lit les deux caractères de la case (ex : E4)
-    } while ((barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] && // Même colonne ou ...
-              barrieres[*compteur_barriere].case2[1] != barrieres[*compteur_barriere].case1[1]) || // ... même ligne
+        //Verification si c'est à une case d'écart (si même colonne ou même ligne avec une case d'écart au max)
+    } while ((barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] &&
+              barrieres[*compteur_barriere].case2[1] != barrieres[*compteur_barriere].case1[1]) ||
              abs(barrieres[*compteur_barriere].case2[0] - barrieres[*compteur_barriere].case1[0]) +
              abs(barrieres[*compteur_barriere].case2[1] - barrieres[*compteur_barriere].case1[1]) != 1);
 
     // Choix du côté
     if (barrieres[*compteur_barriere].case1[0] == barrieres[*compteur_barriere].case2[0]) {
-        // Même colonne
+        // Affichage en colonne
         do {
             printf("Cote ('g' gauche, 'd' droit) : ");
             scanf(" %c", &barrieres[*compteur_barriere].cote);
         } while (barrieres[*compteur_barriere].cote != 'g' && barrieres[*compteur_barriere].cote != 'd');
     } else {
-        // Même ligne
+        // Affichage en ligne
         do {
             printf("Cote ('h' haut, 'b' bas) : ");
             scanf(" %c", &barrieres[*compteur_barriere].cote);
@@ -80,7 +81,6 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
     (*compteur_barriere)++;
     printf("%s %s %c", barrieres[*compteur_barriere].case1, barrieres[*compteur_barriere].case2, barrieres[*compteur_barriere].cote);
 }
-
 
 //Menu affichant les actions possibles.
 void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_plateau barrieres[], int *compteur_barriere) {

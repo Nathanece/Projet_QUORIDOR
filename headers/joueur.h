@@ -12,7 +12,6 @@ typedef struct {
     int couleur;
 } Players; //Structures des joueurs
 
-
 void initialisation_joueurs(Players joueur[4], int *nb_joueurs);
 
 #endif //JOUEUR_H
