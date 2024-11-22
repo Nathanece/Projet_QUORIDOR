@@ -27,17 +27,28 @@ int main() {
         default:
             break;
     }
-    //Appel du menu d'action
-    menu_action(tour_joueur, joueur, nb_joueurs, barrieres, &compteur_barrieres);
+    do {
+        //Sauvegarde des informations du jeu (positions, joueurs, ...)
+        sauvegarde_plateau(joueur, nb_joueurs, tour_joueur, compteur_barrieres, barrieres);
 
-    int gagnant = -1;
-    // Charger les scores au démarrage
-    charger_scores(joueur, nb_joueurs);
-    // Appeler la mise à jour des scores à la fin de la partie
-    mettre_a_jour_scores(joueur, nb_joueurs, gagnant); // gagnant = -1 si égalité
-    sauvegarder_scores(joueur, nb_joueurs);
-
-    return 0;
-
-
+        //Affichage du tableau
+        affichage_plateau(nb_joueurs, joueur, compteur_barrieres, barrieres);
+        //Appel du menu d'action
+        int action = menu_action(tour_joueur, joueur);
+        //Actions à réaliser en fonction du choix retourné
+        switch(action) {
+            //Cas où le joueur veut déplacer son pion
+            case 1:
+                deplacer_pion(tour_joueur, joueur);
+            break;
+            //Cas où le joueur veut placer une barriere
+            case 2:
+                poser_barriere(barrieres, joueur, &compteur_barrieres, tour_joueur);
+            break;
+            //Cas où le joueur veut sauter son tour
+            case 3:
+                break;
+        }
+        changement_tour(&tour_joueur, nb_joueurs);
+    } while (1);
 }

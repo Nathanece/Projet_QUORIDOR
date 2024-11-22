@@ -97,50 +97,31 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
 }
 
 //Menu affichant les actions possibles.
-void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_plateau barrieres[], int *compteur_barriere) {
+int menu_action(int tour_joueur, Players joueur[]) {
     int action;
-    int fin = 0;
+    //Choix de l'action selon l'affichage
     do {
-        //Choix de l'action selon l'affichage
-        do {
-            //Sauvegarde des informations du jeu (positions, joueurs, ...)
-            sauvegarde_plateau(joueur, nb_joueurs, tour_joueur, *compteur_barriere, barrieres);
+        //Initialisation couleur
+        Color(15, 0);
+        //Affichage du pseudo du joueur avec sa couleur associée
+        printf("\nC'est le tour de");
+        Color(joueur[tour_joueur].couleur, 0);
+        printf(" %s\n", joueur[tour_joueur].nom);
+        //Remise à la couleur originale
+        Color(15, 0);
+        printf("Quelle action voulez vous faire ?\n"
+               "-1 Deplacer son pion\n"
+               "-2 Poser une barriere\n"
+               "-3 Passer son tour\n"
+               "-4 Annuler la derniere action\n");
+        scanf(" %d", &action);
+    }while (action < 1 || action > 4);
+    return action;
+}
 
-            //Affichage du tableau
-            affichage_plateau(nb_joueurs, joueur, *compteur_barriere, barrieres);
-
-            //Initialisation couleur
-            Color(15, 0);
-            //Affichage du pseudo du joueur avec sa couleur associée
-            printf("\nC'est le tour de");
-            Color(joueur[tour_joueur].couleur, 0);
-            printf(" %s\n", joueur[tour_joueur].nom);
-            //Remise à la couleur originale
-            Color(15, 0);
-            printf("Quelle action voulez vous faire ?\n"
-                   "-1 Deplacer son pion\n"
-                   "-2 Poser une barriere\n"
-                   "-3 Passer son tour\n"
-                   "-4 Annuler la derniere action\n");
-            scanf(" %d", &action);
-        }while (action < 1 || action > 4);
-        //L'action réalisée en fonction du choix du joueur
-        switch(action) {
-            case 1: //Deplacement du pion
-                deplacer_pion(tour_joueur, joueur);
-            break;
-            case 2:
-                poser_barriere(barrieres, joueur, compteur_barriere, tour_joueur);
-            //Ne rien faire si on saute son tour
-            case 3:
-                break;
-            default:
-                break;
-        }
-
-        //Permet de changer de tour (en fonction du nombre de joueurs
-        tour_joueur = ++tour_joueur%nb_joueurs;
-    }while(1);
+//Fonction permettant de changer de tour (en fonction du nombre de joueurs
+void changement_tour(int* tour_joueur, int nb_joueurs) {
+    *tour_joueur = ++(*tour_joueur) % nb_joueurs;
 }
 
 //Affichage de la fiche d'aide explicant comment jouer
