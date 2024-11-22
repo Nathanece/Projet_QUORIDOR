@@ -74,3 +74,24 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
         }
     }
 }
+
+
+void sauvegarder_scores(Players joueur[], int nb_joueurs) {
+    // Ouverture du fichier en mode ajout
+    FILE *fichier = fopen("../scores.txt", "a+");
+
+    // Vérification si le fichier est correctement ouvert
+    if (fichier == NULL) {
+        printf("Erreur d'ouverture du fichier des scores.\n");
+        return;
+    }
+
+    // Écriture des scores de tous les joueurs dans le fichier
+    for (int i = 0; i < nb_joueurs; i++) {
+        fprintf(fichier, "%s %d\n", joueur[i].nom, joueur[i].score);
+    }
+
+    // Fermeture du fichier pour libérer les ressources
+    fclose(fichier);
+    printf("Scores sauvegardés avec succès.\n");
+}
