@@ -95,3 +95,34 @@ void sauvegarder_scores(Players joueur[], int nb_joueurs) {
     fclose(fichier);
     printf("Scores sauvegardés avec succès.\n");
 }
+
+
+
+void charger_scores(Players joueur[], int nb_joueurs) {
+    // Ouverture du fichier en mode lecture
+    FILE *fichier = fopen("../scores.txt", "r");
+
+    // Vérification si le fichier est accessible
+    if (fichier == NULL) {
+        printf("Aucun fichier de scores trouvé. Les scores démarrent à 0.\n");
+        return;
+    }
+
+    // Variables temporaires pour stocker les données lues
+    char nom_temp[pseudo];
+    int score_temp;
+
+    // Lecture ligne par ligne des noms et scores du fichier
+    while (fscanf(fichier, "%s %d\n", nom_temp, &score_temp) != EOF) {
+        for (int i = 0; i < nb_joueurs; i++) {
+            if (strcmp(joueur[i].nom, nom_temp) == 0) {
+                joueur[i].score = score_temp;
+                break;
+            }
+        }
+    }
+
+    // Fermeture du fichier après la lecture
+    fclose(fichier);
+    printf("Scores chargés avec succès.\n");
+}
