@@ -20,6 +20,8 @@ int main() {
         case 2:
             chargement_plateau(joueur, &nb_joueurs, &tour_joueur, &compteur_barrieres, barrieres);
         break;
+        case 3:
+            break;
         default:
             break;
     }

@@ -131,6 +131,9 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_pla
             break;
             case 2:
                 poser_barriere(barrieres, joueur, compteur_barriere, tour_joueur);
+            //Ne rien faire si on saute son tour
+            case 3:
+                break;
             default:
                 break;
         }
@@ -138,6 +141,10 @@ void menu_action(int tour_joueur, Players joueur[], int nb_joueurs, Barriere_pla
         //Permet de changer de tour (en fonction du nombre de joueurs
         tour_joueur = ++tour_joueur%nb_joueurs;
     }while(1);
+}
+
+//Affichage de la fiche d'aide explicant comment jouer
+void fiche_aide() {
 }
 
 //MENU DE DEPART. Il est affiché au tout début du jeu
