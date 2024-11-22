@@ -48,7 +48,7 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
     do {
         printf("Case 1 (format B6, E9 ...) : ");
         scanf(" %2s", barrieres[*compteur_barriere].case1); // Lit les 2 caractères de la case (ex : E4)
-    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'Z' ||
+    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'I' ||
              barrieres[*compteur_barriere].case1[1] < '1' || barrieres[*compteur_barriere].case1[1] > '9');
 
     // Récupération de la deuxième case
@@ -56,7 +56,9 @@ void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compt
         printf("Case 2 (format : B6, E9 ...) : ");
         scanf(" %2s", barrieres[*compteur_barriere].case2); // Lit les deux caractères de la case (ex : E4)
         //Verification si c'est à une case d'écart (si même colonne ou même ligne avec une case d'écart au max)
-    } while ((barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] &&
+    } while (barrieres[*compteur_barriere].case1[0] < 'A' || barrieres[*compteur_barriere].case1[0] > 'I' ||
+             barrieres[*compteur_barriere].case1[1] < '1' || barrieres[*compteur_barriere].case1[1] > '9' &&
+        (barrieres[*compteur_barriere].case2[0] != barrieres[*compteur_barriere].case1[0] &&
               barrieres[*compteur_barriere].case2[1] != barrieres[*compteur_barriere].case1[1]) ||
              abs(barrieres[*compteur_barriere].case2[0] - barrieres[*compteur_barriere].case1[0]) +
              abs(barrieres[*compteur_barriere].case2[1] - barrieres[*compteur_barriere].case1[1]) != 1);
