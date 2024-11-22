@@ -4,12 +4,12 @@ project(Code_QUORIDOR C)
 set(CMAKE_C_STANDARD 23)
 
 add_executable(Quoridor
-        "codes source/menu.c"
-        "headers/joueur.h"
-        "codes source/plateau.c"
+        "codes_source/menu.c"
+        headers/joueur.h
+        "codes_source/plateau.c"
         headers/plateau.h
-        "codes source/joueur.c"
+        "codes_source/joueur.c"
         main.c
         headers/menu.h
-        "codes source/score"
-        "codes source/score")
+        "codes_source/score.c"
+        codes_source/plateau.c)
