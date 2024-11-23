@@ -12,26 +12,36 @@ int tirage_au_sort(int nb_joueurs) {
 }
 
 //FONCTION de déplacement du pion
-void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Barriere_plateau barrieres[]) {
+void deplacer_pion(int tour_joueur, Players joueur[], int nb_joueurs, int compteur_barrieres, Barriere_plateau barrieres[]) {
     int deplacement;
-    //int pos_i_x = joueur[tour_joueur].coord_y
+    int pos_i_x = joueur[tour_joueur].coord_x, pos_i_y = joueur[tour_joueur].coord_y;
+    int pos_f_x = pos_i_x, pos_f_y = pos_i_y;
     //Choix du déplacement du pion
     do {
         printf("Ou voulez vous aller ?\n"
                "-1 'Haut'\n-2 'Bas'\n-3 'Gauche'\n-4 'Droite'\n");
         scanf(" %d", &deplacement);
-        if(deplacement == 1 && joueur[tour_joueur].coord_y==1) {
-            deplacement=-2;
+        //Cas de déplacement
+        switch(deplacement) {
+            case 1: //Aller en haut (il semble que je doive faire diminuer cette valeur)
+                pos_f_y--;
+                break;
+            case 2: //Aller en bas (même remarque que haut à l'inverse)
+                pos_f_y++;
+                break;
+            case 3: //Aller a gauche
+                pos_f_x--;
+            break;
+            case 4: //Aller a droite
+                pos_f_x++;
+            break;
+            default:
+                deplacement=-3; // erreur de saisie
+                break;
         }
-        if(deplacement == 2 && joueur[tour_joueur].coord_y==9) {
-            deplacement=-2;
-        }
-        if(deplacement == 3 && joueur[tour_joueur].coord_x==1) {
-            deplacement=-2;
-        }
-        if(deplacement == 4 && joueur[tour_joueur].coord_x==9) {
-            deplacement=-2;
-        }
+        //blindage sortie de terrain;
+        if(pos_f_x<=0 || pos_f_y<=0 || pos_f_x>=10 || pos_f_y>=10) { deplacement=-2; }
+
         // blindage barriere
         switch(deplacement) {
             case 1://haut
@@ -41,16 +51,16 @@ void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Bar
                         case2_x = barrieres[i].case2[0]-'A'+1,
                         case2_y = barrieres[i].case2[1]-'0';
                     // blocage passage barriere horizontale bas 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y+1
+                    if(pos_i_x==case1_x && pos_i_y==case1_y+1
                             && barrieres[i].cote=='b') { deplacement=-1; }
                     // blocage passage barriere horizontale bas 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y+1
+                    if(pos_i_x==case2_x && pos_i_y==case2_y+1
                             && barrieres[i].cote=='b') { deplacement=-1; }
                     // blocage passage barriere horizontale haut 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                    if(pos_i_x==case1_x && pos_i_y==case1_y
                             && barrieres[i].cote=='h') { deplacement=-1; }
                     // blocage passage barriere horizontale haut 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                    if(pos_i_x==case2_x && pos_i_y==case2_y
                             && barrieres[i].cote=='h') { deplacement=-1; }
                 }
                break;
@@ -61,16 +71,16 @@ void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Bar
                         case2_x = barrieres[i].case2[0]-'A'+1,
                     case2_y = barrieres[i].case2[1]-'0';
                     // blocage passage barriere horizontale bas 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                    if(pos_i_x==case1_x && pos_i_y==case1_y
                             && barrieres[i].cote=='b') { deplacement=-1; }
                     // blocage passage barriere horizontale bas 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                    if(pos_i_x==case2_x && pos_i_y==case2_y
                             && barrieres[i].cote=='b') { deplacement=-1; }
                     // blocage passage barriere horizontale haut 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y-1
+                    if(pos_i_x==case1_x && pos_i_y==case1_y-1
                             && barrieres[i].cote=='h') { deplacement=-1; }
                     // blocage passage barriere horizontale haut 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y-1
+                    if(pos_i_x==case2_x && pos_i_y==case2_y-1
                             && barrieres[i].cote=='h') { deplacement=-1; }
                 }
                 break;
@@ -81,16 +91,16 @@ void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Bar
                         case2_x = barrieres[i].case2[0]-'A'+1,
                         case2_y = barrieres[i].case2[1]-'0';
                     // blocage passage barriere verticale gauche 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                    if(pos_i_x==case1_x && pos_i_y==case1_y
                             && barrieres[i].cote=='g') { deplacement=-1; }
                     // blocage passage barriere verticale gauche 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                    if(pos_i_x==case2_x && pos_i_y==case2_y
                             && barrieres[i].cote=='g') { deplacement=-1; }
                     // blocage passage barriere verticale droite 1ere case
-                    if(joueur[tour_joueur].coord_x==case1_x+1 && joueur[tour_joueur].coord_y==case1_y
+                    if(pos_i_x==case1_x+1 && pos_i_y==case1_y
                             && barrieres[i].cote=='d') { deplacement=-1; }
                     // blocage passage barriere verticale droite 2e case
-                    if(joueur[tour_joueur].coord_x==case2_x+1 && joueur[tour_joueur].coord_y==case2_y
+                    if(pos_i_x==case2_x+1 && pos_i_y==case2_y
                             && barrieres[i].cote=='d') { deplacement=-1; }
                 }
                 break;
@@ -101,56 +111,62 @@ void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Bar
                     case2_x = barrieres[i].case2[0]-'A'+1,
                     case2_y = barrieres[i].case2[1]-'0';
                 // blocage passage barriere verticale gauche 1ere case
-                if(joueur[tour_joueur].coord_x==case1_x-1 && joueur[tour_joueur].coord_y==case1_y
+                if(pos_i_x==case1_x-1 && pos_i_y==case1_y
                         && barrieres[i].cote=='g') { deplacement=-1; }
                 // blocage passage barriere verticale gauche 2e case
-                if(joueur[tour_joueur].coord_x==case2_x-1 && joueur[tour_joueur].coord_y==case2_y
+                if(pos_i_x==case2_x-1 && pos_i_y==case2_y
                         && barrieres[i].cote=='g') { deplacement=-1; }
                 // blocage passage barriere verticale droite 1ere case
-                if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                if(pos_i_x==case1_x && pos_i_y==case1_y
                         && barrieres[i].cote=='d') { deplacement=-1; }
                 // blocage passage barriere verticale droite 2e case
-                if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                if(pos_i_x==case2_x && pos_i_y==case2_y
                         && barrieres[i].cote=='d') { deplacement=-1; }
             }
             break;
-            default: deplacement=-1;
         }
-        //cas d'un joueur déjà présent sur la case
-        for(int i = 0; i < compteur_barrieres; i++) {
 
+        //cas d'un joueur déjà présent sur la case
+        for(int i = 0; i < nb_joueurs; i++) {
+            if (deplacement>0 && i!=tour_joueur && pos_f_x == joueur[i].coord_x && pos_f_y == joueur[i].coord_y) {
+                deplacement=-4;
+            }
         }
         switch(deplacement) {
             case -1:
                 Color(3, 0);
                 printf("Vous ne pouvez effectuer cette action car il y a une barriere\n");
                 Color(15, 0);
+                //reinitialisation du mouvement du joueur
+                pos_f_x=pos_i_x;
+                pos_f_y=pos_i_y;
                 break;
             case -2:
                 Color(3, 0);
                 printf("Vous ne pouvez effectuer cette action car vous etes au bord du terrain\n");
                 Color(15, 0);
+                //reinitialisation du mouvement du joueur
+                pos_f_x=pos_i_x;
+                pos_f_y=pos_i_y;
+                break;
+            case -3:
+                Color(3, 0);
+                printf("Valeur saisie non autorisee !\n");
+                Color(15, 0);
+                break;
+            case -4:
+                Color(3, 0);
+                printf("Un joueur est present sur cette case.\n");
+                Color(15, 0);
+                //reinitialisation de la position initiale du joueur
+                pos_i_x=pos_f_x;
+                pos_i_y=pos_f_y;
                 break;
         }
-        //Blindage de la saisie
     } while(deplacement < 0 || deplacement > 4);
-    //Cas de déplacement
-    switch(deplacement) {
-        case 1: //Aller en haut (il semble que je doive faire diminuer cette valeur)
-            joueur[tour_joueur].coord_y--;
-            break;
-        case 2: //Aller en bas (même remarque que haut à l'inverse)
-            joueur[tour_joueur].coord_y++;
-            break;
-        case 3: //Aller a gauche
-            joueur[tour_joueur].coord_x--;
-            break;
-        case 4: //Aller a droite
-            joueur[tour_joueur].coord_x++;
-            break;
-        default:
-            break;
-    }
+    //met à jour la nouvelle position du joueur
+    joueur[tour_joueur].coord_x = pos_f_x;
+    joueur[tour_joueur].coord_y = pos_f_y;
 }
 
 //Fonction stockant les barrières placées

@@ -1,6 +1,6 @@
-2 1 
-alexandre 1 A 10 4 3 0 1 
-philippe 1 P 7 7 4 0 4 
+2 0 
+alexandre 1 A 10 5 3 0 1 
+philippe 1 P 7 5 4 0 4 
 3 
 E2 E3 g 
 D4 D5 d 
