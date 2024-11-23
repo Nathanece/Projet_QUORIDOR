@@ -39,7 +39,7 @@ int main() {
         switch(action) {
             //Cas où le joueur veut déplacer son pion
             case 1:
-                deplacer_pion(tour_joueur, joueur);
+                deplacer_pion(tour_joueur, joueur, compteur_barrieres, barrieres);
             break;
             //Cas où le joueur veut placer une barriere
             case 2:

@@ -12,24 +12,125 @@ int tirage_au_sort(int nb_joueurs) {
 }
 
 //FONCTION de déplacement du pion
-void deplacer_pion(int tour_joueur, Players joueur[]) {
+void deplacer_pion(int tour_joueur, Players joueur[],int compteur_barrieres, Barriere_plateau barrieres[]) {
     int deplacement;
+    //int pos_i_x = joueur[tour_joueur].coord_y
     //Choix du déplacement du pion
     do {
         printf("Ou voulez vous aller ?\n"
                "-1 'Haut'\n-2 'Bas'\n-3 'Gauche'\n-4 'Droite'\n");
         scanf(" %d", &deplacement);
         if(deplacement == 1 && joueur[tour_joueur].coord_y==1) {
-            deplacement=-1;
+            deplacement=-2;
         }
         if(deplacement == 2 && joueur[tour_joueur].coord_y==9) {
-            deplacement=-1;
+            deplacement=-2;
         }
         if(deplacement == 3 && joueur[tour_joueur].coord_x==1) {
-            deplacement=-1;
+            deplacement=-2;
         }
         if(deplacement == 4 && joueur[tour_joueur].coord_x==9) {
-            deplacement=-1;
+            deplacement=-2;
+        }
+        // blindage barriere
+        switch(deplacement) {
+            case 1://haut
+                for (int i = 0; i < compteur_barrieres; i++) {
+                    int case1_x = barrieres[i].case1[0]-'A'+1,
+                        case1_y = barrieres[i].case1[1]-'0',
+                        case2_x = barrieres[i].case2[0]-'A'+1,
+                        case2_y = barrieres[i].case2[1]-'0';
+                    // blocage passage barriere horizontale bas 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y+1
+                            && barrieres[i].cote=='b') { deplacement=-1; }
+                    // blocage passage barriere horizontale bas 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y+1
+                            && barrieres[i].cote=='b') { deplacement=-1; }
+                    // blocage passage barriere horizontale haut 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                            && barrieres[i].cote=='h') { deplacement=-1; }
+                    // blocage passage barriere horizontale haut 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                            && barrieres[i].cote=='h') { deplacement=-1; }
+                }
+               break;
+            case 2://bas
+                for (int i = 0; i < compteur_barrieres; i++) {
+                    int case1_x = barrieres[i].case1[0]-'A'+1,
+                        case1_y = barrieres[i].case1[1]-'0',
+                        case2_x = barrieres[i].case2[0]-'A'+1,
+                    case2_y = barrieres[i].case2[1]-'0';
+                    // blocage passage barriere horizontale bas 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                            && barrieres[i].cote=='b') { deplacement=-1; }
+                    // blocage passage barriere horizontale bas 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                            && barrieres[i].cote=='b') { deplacement=-1; }
+                    // blocage passage barriere horizontale haut 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y-1
+                            && barrieres[i].cote=='h') { deplacement=-1; }
+                    // blocage passage barriere horizontale haut 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y-1
+                            && barrieres[i].cote=='h') { deplacement=-1; }
+                }
+                break;
+            case 3://gauche
+                for (int i = 0; i < compteur_barrieres; i++) {
+                    int case1_x = barrieres[i].case1[0]-'A'+1,
+                        case1_y = barrieres[i].case1[1]-'0',
+                        case2_x = barrieres[i].case2[0]-'A'+1,
+                        case2_y = barrieres[i].case2[1]-'0';
+                    // blocage passage barriere verticale gauche 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                            && barrieres[i].cote=='g') { deplacement=-1; }
+                    // blocage passage barriere verticale gauche 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                            && barrieres[i].cote=='g') { deplacement=-1; }
+                    // blocage passage barriere verticale droite 1ere case
+                    if(joueur[tour_joueur].coord_x==case1_x+1 && joueur[tour_joueur].coord_y==case1_y
+                            && barrieres[i].cote=='d') { deplacement=-1; }
+                    // blocage passage barriere verticale droite 2e case
+                    if(joueur[tour_joueur].coord_x==case2_x+1 && joueur[tour_joueur].coord_y==case2_y
+                            && barrieres[i].cote=='d') { deplacement=-1; }
+                }
+                break;
+            case 4://droite
+            for (int i = 0; i < compteur_barrieres; i++) {
+                int case1_x = barrieres[i].case1[0]-'A'+1,
+                    case1_y = barrieres[i].case1[1]-'0',
+                    case2_x = barrieres[i].case2[0]-'A'+1,
+                    case2_y = barrieres[i].case2[1]-'0';
+                // blocage passage barriere verticale gauche 1ere case
+                if(joueur[tour_joueur].coord_x==case1_x-1 && joueur[tour_joueur].coord_y==case1_y
+                        && barrieres[i].cote=='g') { deplacement=-1; }
+                // blocage passage barriere verticale gauche 2e case
+                if(joueur[tour_joueur].coord_x==case2_x-1 && joueur[tour_joueur].coord_y==case2_y
+                        && barrieres[i].cote=='g') { deplacement=-1; }
+                // blocage passage barriere verticale droite 1ere case
+                if(joueur[tour_joueur].coord_x==case1_x && joueur[tour_joueur].coord_y==case1_y
+                        && barrieres[i].cote=='d') { deplacement=-1; }
+                // blocage passage barriere verticale droite 2e case
+                if(joueur[tour_joueur].coord_x==case2_x && joueur[tour_joueur].coord_y==case2_y
+                        && barrieres[i].cote=='d') { deplacement=-1; }
+            }
+            break;
+            default: deplacement=-1;
+        }
+        //cas d'un joueur déjà présent sur la case
+        for(int i = 0; i < compteur_barrieres; i++) {
+
+        }
+        switch(deplacement) {
+            case -1:
+                Color(3, 0);
+                printf("Vous ne pouvez effectuer cette action car il y a une barriere\n");
+                Color(15, 0);
+                break;
+            case -2:
+                Color(3, 0);
+                printf("Vous ne pouvez effectuer cette action car vous etes au bord du terrain\n");
+                Color(15, 0);
+                break;
         }
         //Blindage de la saisie
     } while(deplacement < 0 || deplacement > 4);
@@ -37,16 +138,16 @@ void deplacer_pion(int tour_joueur, Players joueur[]) {
     switch(deplacement) {
         case 1: //Aller en haut (il semble que je doive faire diminuer cette valeur)
             joueur[tour_joueur].coord_y--;
-        break;
+            break;
         case 2: //Aller en bas (même remarque que haut à l'inverse)
             joueur[tour_joueur].coord_y++;
-        break;
+            break;
         case 3: //Aller a gauche
             joueur[tour_joueur].coord_x--;
-        break;
+            break;
         case 4: //Aller a droite
             joueur[tour_joueur].coord_x++;
-        break;
+            break;
         default:
             break;
     }
@@ -115,7 +216,7 @@ int menu_action(int tour_joueur, Players joueur[]) {
                "-3 Passer son tour\n"
                "-4 Annuler la derniere action\n");
         scanf(" %d", &action);
-    }while (action < 1 || action > 4);
+    } while (action < 1 || action > 4);
     return action;
 }
 
@@ -124,7 +225,7 @@ void changement_tour(int* tour_joueur, int nb_joueurs) {
     *tour_joueur = ++(*tour_joueur) % nb_joueurs;
 }
 
-//Affichage de la fiche d'aide explicant comment jouer
+//Affichage de la fiche d'aide expliquant comment jouer
 void fiche_aide() {
 }
 

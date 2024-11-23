@@ -1,5 +1,7 @@
 2 1 
-test 1 T 9 5 1 0 1 
-test2 1 A 10 5 9 0 4 
-1 
-E2 E3 d 
+alexandre 1 A 10 4 3 0 1 
+philippe 1 P 7 7 4 0 4 
+3 
+E2 E3 g 
+D4 D5 d 
+F3 G3 b 
