@@ -7,8 +7,17 @@ typedef struct {
     char cote; //'g' pour gauche, 'h' pour haut, ...
 }Barriere_plateau;
 
-void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int compteur_barriere, Barriere_plateau barriere[]);
-void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int *compteur_barriere, Barriere_plateau barriere[]);
+//Sauvegarde des différentes infos
+void sauvegarde_barrieres(int compteur_barriere, Barriere_plateau barriere[]);
+void sauvegarde_coord_joueurs(Players joueur[], int nbjoueurs);
+void sauvegarde_info_joueurs(Players joueur[], int nbjoueurs, int tour_joueur);
+
+//Chargement des différentes infos
+void chargement_barrieres(int *compteur_barriere, Barriere_plateau barriere[]);
+void chargement_coord_joueurs(Players joueur[], int* nbjoueurs);
+void chargement_infos_joueurs(Players joueur[], int* nbjoueurs, int* tour_joueur);
+
+//Affichage du plateau de jeu
 void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, Barriere_plateau barriere[]);
 void Color(int couleurDuTexte,int couleurDeFond);
 void gotoligcol(int lig, int col);

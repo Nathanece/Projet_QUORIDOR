@@ -31,9 +31,12 @@ int main() {
                 case 1:
                     creation_joueurs(joueur, &nb_joueurs);
                 tour_joueur = tirage_au_sort(nb_joueurs);
+                sauvegarde_info_joueurs(joueur, nb_joueurs, tour_joueur);
                 break;
                 case 2:
-                    chargement_plateau(joueur, &nb_joueurs, &tour_joueur, &compteur_barrieres, barrieres);
+                chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
+                chargement_coord_joueurs(joueur, &nb_joueurs);
+                chargement_barrieres(&compteur_barrieres, barrieres);
                 break;
                 case 3:
                     fiche_aide();
@@ -59,7 +62,8 @@ int main() {
                 continuer_partie = 0;
                 do {
                     //Sauvegarde des informations du jeu (positions, joueurs, ...)
-                    sauvegarde_plateau(joueur, nb_joueurs, tour_joueur, compteur_barrieres, barrieres);
+                    sauvegarde_coord_joueurs(joueur, nb_joueurs);
+                    sauvegarde_barrieres(compteur_barrieres, barrieres);
 
                     //Affichage du tableau
                     affichage_plateau(nb_joueurs, joueur, compteur_barrieres, barrieres);
@@ -85,7 +89,6 @@ int main() {
                 Sleep(3000);
                 //Reinitialisation des coordonnées des joueurs
                 reinitialisation_joueurs(joueur, nb_joueurs);
-                sauvegarde_plateau(joueur, nb_joueurs, tour_joueur, compteur_barrieres, barrieres);
 
                 sauvegarder_scores(joueur, nb_joueurs);
                 system("cls");

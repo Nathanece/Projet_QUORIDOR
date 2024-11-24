@@ -27,21 +27,12 @@ void gotoligcol(int lig, int col) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), mycoord);
 }
 
-//Sauvegarde de l'état de la partie
-void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int compteur_barriere, Barriere_plateau barriere[]) {
-    FILE* fplateau = fopen("../plateau.txt", "w");
+//Sauvegarde des barrieres (nb de barrieres et coordonnées)
+void sauvegarde_barrieres(int compteur_barriere, Barriere_plateau barriere[]) {
+    FILE* fplateau = fopen("../barriere.txt", "w");
     if (fplateau == NULL) {
         printf("Erreur\n");
         return;
-    }
-
-    //Enregistrement du nombre de joueurs
-    fprintf(fplateau, "%d %d \n", nbjoueurs, tour_joueur);
-
-    //Enregistrement des infomations de chaque joueur
-    for (int i = 0; i < nbjoueurs; i++) {
-        fprintf(fplateau, "%s %d %c %d %d %d %d %d %d\n",
-            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].coord_x, joueur[i].coord_y, joueur[i].score, joueur[i].couleur, joueur[i].coord_victoire);
     }
     //Enregistrement du nombre de barrieres placées
     fprintf(fplateau, "%d \n", compteur_barriere);
@@ -54,21 +45,47 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int co
     fclose(fplateau);
 }
 
-//Chargement de la sauvegarde
-void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int *compteur_barriere, Barriere_plateau barriere[]) {
-    FILE* fplateau = fopen("../plateau.txt", "r");
+//Sauvegarde des coordonnées des joueurs
+void sauvegarde_coord_joueurs(Players joueur[], int nbjoueurs) {
+    FILE* fplateau = fopen("../coord_joueurs.txt", "w");
     if (fplateau == NULL) {
         printf("Erreur\n");
         return;
     }
 
-    //Lit la valeur enregistrée pour nbjoueur et l'assigne à la variable nbjoueur
-    fscanf(fplateau, "%d %d\n", nbjoueurs, tour_joueur);
+    //Enregistrement des coordonnées des joueurs
+    for (int i = 0; i < nbjoueurs; i++) {
+        fprintf(fplateau, "%d %d\n",
+            joueur[i].coord_x, joueur[i].coord_y);
+    }
+    fclose(fplateau);
+}
 
-    //Lecture des informations et assignation des données à chaques joueurs
-    for (int i = 0; i < *nbjoueurs; i++) {
-        fscanf(fplateau, "%s %d %c %d %d %d %d %d %d \n",
-        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score, &joueur[i].couleur, &joueur[i].coord_victoire);
+//Sauvegarde des informations initiales du joueurs
+void sauvegarde_info_joueurs(Players joueur[], int nbjoueurs, int tour_joueur) {
+    FILE* fplateau = fopen("../infos_joueurs.txt", "w");
+    if (fplateau == NULL) {
+        printf("Erreur\n");
+        return;
+    }
+
+    //Enregistrement du nombre de joueurs
+    fprintf(fplateau, "%d %d \n", nbjoueurs, tour_joueur);
+
+    //Enregistrement des infomations de chaque joueur
+    for (int i = 0; i < nbjoueurs; i++) {
+        fprintf(fplateau, "%s %d %c %d %d %d\n",
+            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].couleur, joueur[i].coord_victoire);
+    }
+    fclose(fplateau);
+}
+
+//Chargement des barrieres sur le plateau
+void chargement_barrieres(int *compteur_barriere, Barriere_plateau barriere[]) {
+    FILE* fplateau = fopen("../barriere.txt", "r");
+    if (fplateau == NULL) {
+        printf("Erreur\n");
+        return;
     }
     //Lecture du nombre de barrieres
     fscanf(fplateau, "%d \n", compteur_barriere);
@@ -78,7 +95,40 @@ void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int 
         fscanf(fplateau, "%s %s %c \n",
             barriere[i].case1, barriere[i].case2, &barriere[i].cote);
     }
-        fclose(fplateau);
+    fclose(fplateau);
+}
+
+//Chargement des coordonnées des joueurs
+void chargement_coord_joueurs(Players joueur[], int* nbjoueurs) {
+    FILE* fplateau = fopen("../coord_joueurs.txt", "r");
+    if (fplateau == NULL) {
+        printf("Erreur\n");
+        return;
+    }
+    //Lecture des informations et assignation des données à chaques joueurs
+    for (int i = 0; i < *nbjoueurs; i++) {
+        fscanf(fplateau, "%d %d\n",
+        &joueur[i].coord_x, &joueur[i].coord_y);
+    }
+    fclose(fplateau);
+}
+
+//Chargement des informations des joueurs
+void chargement_infos_joueurs(Players joueur[], int* nbjoueurs, int* tour_joueur) {
+    FILE* fplateau = fopen("../infos_joueurs.txt", "r");
+    if (fplateau == NULL) {
+        printf("Erreur\n");
+        return;
+    }
+    //Lit la valeur enregistrée pour nbjoueur et l'assigne à la variable nbjoueur
+    fscanf(fplateau, "%d %d\n", nbjoueurs, tour_joueur);
+
+    //Lecture des informations et assignation des données à chaques joueurs
+    for (int i = 0; i < *nbjoueurs; i++) {
+        fscanf(fplateau, "%s %d %c %d %d %d \n",
+        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].couleur, &joueur[i].coord_victoire);
+    }
+    fclose(fplateau);
 }
 
 //Affichage du plateau
