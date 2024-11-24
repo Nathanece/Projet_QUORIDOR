@@ -16,6 +16,7 @@ int main() {
     Players joueur[4];//La structure de chacun des joueurs sera dans ce tableau
     Barriere_plateau barrieres[20];//La structure des barrieres
     int fin = 0; //Verifie si la partie est finie
+    int quitter = 0; //Vérifie si l'utilisateur veut sauvegarder et quitter la partie
     int continuer_partie = 0;
 
     do {
@@ -39,11 +40,13 @@ int main() {
                 chargement_barrieres(&compteur_barrieres, barrieres);
                 break;
                 case 3:
+                    system("cls");
                     fiche_aide();
                 //Demande pour quitter ou non le jeu
                 retour = quitter_jeu();
                 break;
                 case 4:
+                    system("cls");
                     afficher_scores();
                 //Demande pour quitter ou non le jeu
                 retour = quitter_jeu();
@@ -61,6 +64,7 @@ int main() {
                 continuer_partie = 0;
                 do {
                     fin = 0;
+                    quitter = 0;
                     //Sauvegarde des informations du jeu (positions, joueurs, ...)
                     sauvegarde_coord_joueurs(joueur, nb_joueurs);
                     sauvegarde_barrieres(compteur_barrieres, barrieres);
@@ -82,25 +86,35 @@ int main() {
                         //Cas où le joueur veut sauter son tour
                         case 3:
                             break;
+                        case 4:
+                            sauvegarde_info_joueurs(joueur, nb_joueurs, tour_joueur);
+                            sauvegarde_coord_joueurs(joueur, nb_joueurs);
+                            sauvegarde_barrieres(compteur_barrieres, barrieres);
+                            sauvegarder_scores(joueur, nb_joueurs);
+                        quitter = 1;
                     }
                     changement_tour(&tour_joueur, nb_joueurs);
                     verification_fin(joueur, nb_joueurs, &fin);
-                } while (fin == 0);
-                Sleep(3000);
-                //Reinitialisation et sauvegarde des coordonnées des joueurs pour une prochaine partie
-                reinitialisation_coord_joueurs(joueur, nb_joueurs);
-                sauvegarde_coord_joueurs(joueur, nb_joueurs);
+                } while (fin == 0 && quitter == 0);
+                if (fin) {
+                    Sleep(3000);
+                    system("cls");
+                    //Reinitialisation et sauvegarde des coordonnées des joueurs pour une prochaine partie
+                    reinitialisation_coord_joueurs(joueur, nb_joueurs);
+                    sauvegarde_coord_joueurs(joueur, nb_joueurs);
 
-                //Reinitialisation et sauvegarde des barrieres
-                reinitialisation_barriere(barrieres, &compteur_barrieres);
-                sauvegarde_barrieres(compteur_barrieres, barrieres);
+                    //Reinitialisation et sauvegarde des barrieres
+                    reinitialisation_barriere(barrieres, &compteur_barrieres);
+                    sauvegarde_barrieres(compteur_barrieres, barrieres);
 
-                sauvegarder_scores(joueur, nb_joueurs);
-                system("cls");
-                printf("Voulez vous continuer ? (1 : oui, 0 : non)\n");
-                scanf(" %d", &continuer_partie);
+                    sauvegarder_scores(joueur, nb_joueurs);
+                    printf("Voulez vous continuer ? (1 : oui, 0 : non)\n");
+                    scanf(" %d", &continuer_partie);
+                }
+                else
+                    continuer_partie = 0;
             } while (continuer_partie);
-            retour = quitter_jeu();
+            retour = 1;
         }
     } while (retour);
     return 0;

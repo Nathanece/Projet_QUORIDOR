@@ -230,7 +230,7 @@ int menu_action(int tour_joueur, Players joueur[]) {
                "-1 Deplacer son pion\n"
                "-2 Poser une barriere\n"
                "-3 Passer son tour\n"
-               "-4 Annuler la derniere action\n");
+               "-4 Sauvegarder et quitter\n");
         scanf(" %d", &action);
         if (joueur[tour_joueur].barriere <= 0 && action == 2) {
             printf("Vous n'avez plus de barrieres\n");
