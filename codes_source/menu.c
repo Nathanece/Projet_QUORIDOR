@@ -247,6 +247,10 @@ void changement_tour(int* tour_joueur, int nb_joueurs) {
 
 //Affichage de la fiche d'aide expliquant comment jouer
 void fiche_aide() {
+    printf("//AIDE ET INFORMATIONS DU JEU//\n"
+           "1- Atteindre le bord opposé du plateau pour gagner\n"
+           "2- Interdit d'enfermer l'adversaire avec les barrieres\n"
+           "3- Format pour placer des barrieres : Case1, Case2, cote\n");
 }
 
 void afficher_scores(Players joueur[], int nb_joueurs) {

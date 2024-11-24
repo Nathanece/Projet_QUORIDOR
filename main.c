@@ -27,9 +27,6 @@ int main() {
             //Réinitialise l'écran (plus rien n'est affiché)
             system("cls");
             menu(&choix);
-            //Chargement du score et des infos si l'utilisateur veut voir le score au préalable
-            charger_scores(joueur, nb_joueurs);
-            chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
             //Les fonctions à appeler en fonction du choix de l'utilisateur
             switch(choix) {
                 case 1:
@@ -40,6 +37,8 @@ int main() {
                 case 2:
                 chargement_coord_joueurs(joueur, &nb_joueurs);
                 chargement_barrieres(&compteur_barrieres, barrieres);
+                charger_scores(joueur, nb_joueurs);
+                chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
                 break;
                 case 3:
                     system("cls");
@@ -48,6 +47,8 @@ int main() {
                 retour = quitter_jeu();
                 break;
                 case 4:
+                    chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
+                    charger_scores(joueur, nb_joueurs);
                     system("cls");
                     afficher_scores(joueur, nb_joueurs);
                 //Demande pour quitter ou non le jeu

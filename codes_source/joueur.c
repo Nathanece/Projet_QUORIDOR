@@ -144,7 +144,6 @@ void charger_scores(Players joueur[], int nb_joueurs) {
     }
     // Fermeture du fichier après la lecture
     fclose(fichier);
-    printf("Scores chargés avec succès.\n");
 }
 
 void mettre_a_jour_scores(Players joueur[], int gagnant) {
