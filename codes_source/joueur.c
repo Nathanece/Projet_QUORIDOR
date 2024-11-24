@@ -2,7 +2,33 @@
 #include <string.h>
 #include "../headers/joueur.h"
 
-void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
+void reinitialisation_joueurs(Players joueur[], int nb_joueurs) {
+    for (int i = 0; i < nb_joueurs; i++) {
+        switch(i) {
+            case 0:
+                joueur[i].coord_x = 5;
+            joueur[i].coord_y = 1; //On respecte la notation du plateau. La coordonnée minimale est 1.
+            break;
+            case 1:
+                joueur[i].coord_x = 5;
+            joueur[i].coord_y = 9; //La coordonnée maximale du plateau est 9.
+            break;
+            case 2:
+                joueur[i].coord_x = 1;
+            joueur[i].coord_y = 5;
+            break;
+            case 3:
+                joueur[i].coord_x = 9;
+            joueur[i].coord_y = 5;
+            break;
+            default:
+                printf("Erreur veuillez relancer le programme");
+            break;
+        }
+    }
+}
+
+void creation_joueurs(Players joueur[4], int *nb_joueurs) {
     //déclaration des variables
     int i; //Pour les boucles
 
@@ -52,21 +78,25 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
                 joueur[i].coord_x = 5;
                 joueur[i].coord_y = 1; //On respecte la notation du plateau. La coordonnée minimale est 1.
                 joueur[i].couleur  = 1; //Couleur bleu
+                joueur[i].coord_victoire = 9;
             break;
             case 1:
                 joueur[i].coord_x = 5;
                 joueur[i].coord_y = 9; //La coordonnée maximale du plateau est 9.
                 joueur[i].couleur  = 4; //Couleur rouge
+                joueur[i].coord_victoire = 1;
                 break;
             case 2:
                 joueur[i].coord_x = 1;
                 joueur[i].coord_y = 5;
                 joueur[i].couleur  = 5; //Couleu violet
+                joueur[i].coord_victoire = 9;
             break;
             case 3:
                 joueur[i].coord_x = 9;
                 joueur[i].coord_y = 5;
                 joueur[i].couleur  = 2; //Couleur vert
+                joueur[i].coord_victoire = 1;
             break;
             default:
                 printf("Erreur veuillez relancer le programme");
@@ -74,7 +104,6 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
         }
     }
 }
-
 
 void sauvegarder_scores(Players joueur[], int nb_joueurs) {
     // Ouverture du fichier en mode ajout
@@ -93,9 +122,8 @@ void sauvegarder_scores(Players joueur[], int nb_joueurs) {
 
     // Fermeture du fichier pour libérer les ressources
     fclose(fichier);
-    printf("Scores sauvegardés avec succès.\n");
+    printf("Scores sauvegardes avec succes.\n");
 }
-
 
 void charger_scores(Players joueur[], int nb_joueurs) {
     // Ouverture du fichier en mode lecture
@@ -126,13 +154,25 @@ void charger_scores(Players joueur[], int nb_joueurs) {
     printf("Scores chargés avec succès.\n");
 }
 
-
-void mettre_a_jour_scores(Players joueur[], int nb_joueurs, int gagnant) {
-    if (gagnant >= 0) {
-        printf("Le gagnant est %s !\n", joueur[gagnant].nom);
-        joueur[gagnant].score += 5;
-    } else {
-        printf("Partie bloquée : aucun point attribué.\n");
-    }
+void mettre_a_jour_scores(Players joueur[], int gagnant) {
+    printf("Le gagnant est %s !\n", joueur[gagnant].nom);
+    joueur[gagnant].score += 5;
 }
 
+void verification_fin(Players joueur[], int nb_joueur, int *fin) {
+    for (int i = 0; i < nb_joueur; i++) {
+        if (i < 2) {
+            if (joueur[i].coord_y == joueur[i].coord_victoire) {
+                mettre_a_jour_scores(joueur, i);
+                (*fin) = 1;
+                break;
+            }
+        } else {
+            if (joueur[i].coord_x == joueur[i].coord_victoire) {
+                mettre_a_jour_scores(joueur, i);
+                (*fin) = 1;
+                break;
+            }
+        }
+    }
+}

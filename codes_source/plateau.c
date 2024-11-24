@@ -40,8 +40,8 @@ void sauvegarde_plateau(Players joueur[], int nbjoueurs, int tour_joueur, int co
 
     //Enregistrement des infomations de chaque joueur
     for (int i = 0; i < nbjoueurs; i++) {
-        fprintf(fplateau, "%s %d %c %d %d %d %d %d \n",
-            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].coord_x, joueur[i].coord_y, joueur[i].score, joueur[i].couleur);
+        fprintf(fplateau, "%s %d %c %d %d %d %d %d %d\n",
+            joueur[i].nom, joueur[i].etat, joueur[i].pion, joueur[i].barriere, joueur[i].coord_x, joueur[i].coord_y, joueur[i].score, joueur[i].couleur, joueur[i].coord_victoire);
     }
     //Enregistrement du nombre de barrieres placées
     fprintf(fplateau, "%d \n", compteur_barriere);
@@ -67,8 +67,8 @@ void chargement_plateau(Players joueur[], int* nbjoueurs, int* tour_joueur, int 
 
     //Lecture des informations et assignation des données à chaques joueurs
     for (int i = 0; i < *nbjoueurs; i++) {
-        fscanf(fplateau, "%s %d %c %d %d %d %d %d \n",
-        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score, &joueur[i].couleur);
+        fscanf(fplateau, "%s %d %c %d %d %d %d %d %d \n",
+        joueur[i].nom, &joueur[i].etat, &joueur[i].pion, &joueur[i].barriere, &joueur[i].coord_x, &joueur[i].coord_y, &joueur[i].score, &joueur[i].couleur, &joueur[i].coord_victoire);
     }
     //Lecture du nombre de barrieres
     fscanf(fplateau, "%d \n", compteur_barriere);
