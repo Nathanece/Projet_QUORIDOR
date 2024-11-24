@@ -245,22 +245,6 @@ void changement_tour(int* tour_joueur, int nb_joueurs) {
 void fiche_aide() {
 }
 
-//MENU DE DEPART. Il est affiché au tout début du jeu
-int menu() {
-    int choix;
-    do {
-        printf("Que voulez vous faire ?\n"
-               "-1 Lancer une nouvelle partie\n"
-               "-2 Reprendre une partie sauvegardee\n"
-               "-3 Afficher l'aide\n"
-               "-4 Afficher le score des joueurs\n"
-               "-5 Quitter le jeu\n");
-        scanf(" %d", &choix);
-    } while (choix < 1 || choix > 6);
-    return choix;
-}
-
-
 void afficher_scores() {
     // Ouverture du fichier contenant les scores en mode lecture
     FILE *fichier = fopen("../scores.txt", "r");
@@ -286,4 +270,26 @@ void afficher_scores() {
 
     // Fermeture du fichier après lecture
     fclose(fichier);
+}
+
+int quitter_jeu() {
+    int retour = 0;
+    do {
+        printf("Voulez vous revenir au menu ? (1 : retour, 0: quitter)\n");
+        scanf(" %d", &retour);
+    }while(retour != 0 && retour != 1);
+    return retour;
+}
+
+//MENU DE DEPART. Il est affiché au tout début du jeu
+void menu(int *choix) {
+    do {
+        printf("Que voulez vous faire ?\n"
+               "-1 Lancer une nouvelle partie\n"
+               "-2 Reprendre une partie sauvegardee\n"
+               "-3 Afficher l'aide\n"
+               "-4 Afficher le score des joueurs\n"
+               "-5 Quitter le jeu\n");
+        scanf(" %d", choix);
+    } while (*choix < 1 || *choix > 6);
 }

@@ -78,7 +78,7 @@ void initialisation_joueurs(Players joueur[4], int *nb_joueurs) {
 
 void sauvegarder_scores(Players joueur[], int nb_joueurs) {
     // Ouverture du fichier en mode ajout
-    FILE *fichier = fopen("../scores.txt", "a+");
+    FILE *fichier = fopen("../scores.txt", "w");
 
     // Vérification si le fichier est correctement ouvert
     if (fichier == NULL) {
