@@ -249,31 +249,12 @@ void changement_tour(int* tour_joueur, int nb_joueurs) {
 void fiche_aide() {
 }
 
-void afficher_scores() {
-    // Ouverture du fichier contenant les scores en mode lecture
-    FILE *fichier = fopen("../scores.txt", "r");
-
-    // Vérifie si le fichier est accessible
-    if (fichier == NULL) {
-        printf("Aucun score enregistré pour le moment.\n");
-        return;
+void afficher_scores(Players joueur[], int nb_joueurs) {
+    printf("Score des joueurs :\n");
+    for (int i = 0; i < nb_joueurs; i++) {
+        printf("%s : %d\n", joueur[i].nom, joueur[i].score);
     }
 
-    // Variables temporaires pour stocker les données lues
-    char nom_temp[pseudo];
-    int score_temp;
-
-    // Affiche un en-tête pour les scores
-    printf("Scores des joueurs :\n");
-
-    // Lecture des scores ligne par ligne
-    while (fscanf(fichier, "%s %d\n", nom_temp, &score_temp) != EOF) {
-        // Affiche le nom et le score du joueur
-        printf("%s : %d points\n", nom_temp, score_temp);
-    }
-
-    // Fermeture du fichier après lecture
-    fclose(fichier);
 }
 
 int quitter_jeu() {

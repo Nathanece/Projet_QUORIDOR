@@ -119,15 +119,13 @@ void sauvegarder_scores(Players joueur[], int nb_joueurs) {
         printf("Erreur d'ouverture du fichier des scores.\n");
         return;
     }
-
     // Écriture des scores de tous les joueurs dans le fichier
     for (int i = 0; i < nb_joueurs; i++) {
-        fprintf(fichier, "%s %d\n", joueur[i].nom, joueur[i].score);
+        fprintf(fichier, " %d \n", joueur[i].score);
     }
 
     // Fermeture du fichier pour libérer les ressources
     fclose(fichier);
-    printf("Scores sauvegardes avec succes.\n");
 }
 
 void charger_scores(Players joueur[], int nb_joueurs) {
@@ -140,20 +138,10 @@ void charger_scores(Players joueur[], int nb_joueurs) {
         return;
     }
 
-    // Variables temporaires pour stocker les données lues
-    char nom_temp[pseudo];
-    int score_temp;
-
-    // Lecture ligne par ligne des noms et scores du fichier
-    while (fscanf(fichier, "%s %d\n", nom_temp, &score_temp) != EOF) {
-        for (int i = 0; i < nb_joueurs; i++) {
-            if (strcmp(joueur[i].nom, nom_temp) == 0) {
-                joueur[i].score = score_temp;
-                break;
-            }
-        }
+    //Chargement du score des joueurs
+    for (int i = 0; i < nb_joueurs; i++) {
+        fscanf(fichier, " %d\n", &joueur[i].score);
     }
-
     // Fermeture du fichier après la lecture
     fclose(fichier);
     printf("Scores chargés avec succès.\n");

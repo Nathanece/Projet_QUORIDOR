@@ -10,7 +10,7 @@ int menu_action(int tour_joueur, Players joueur[]);
 void fiche_aide();
 void poser_barriere(Barriere_plateau barrieres[20], Players joueur[], int *compteur_barriere, int tour_joueur);
 void changement_tour(int* tour_joueur, int nb_joueurs);
-void afficher_scores();
+void afficher_scores(Players joueur[], int nb_joueurs);
 void fiche_aide();
 int quitter_jeu();
 

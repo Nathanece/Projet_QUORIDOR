@@ -17,7 +17,7 @@ int main() {
     Barriere_plateau barrieres[20];//La structure des barrieres
     int fin = 0; //Verifie si la partie est finie
     int quitter = 0; //Vérifie si l'utilisateur veut sauvegarder et quitter la partie
-    int continuer_partie = 0;
+    int continuer_partie = 0; //Permet de continuer à jouer après la fin d'une manche
 
     do {
         //Appel du menu principal
@@ -27,6 +27,9 @@ int main() {
             //Réinitialise l'écran (plus rien n'est affiché)
             system("cls");
             menu(&choix);
+            //Chargement du score et des infos si l'utilisateur veut voir le score au préalable
+            charger_scores(joueur, nb_joueurs);
+            chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
             //Les fonctions à appeler en fonction du choix de l'utilisateur
             switch(choix) {
                 case 1:
@@ -35,7 +38,6 @@ int main() {
                 sauvegarde_info_joueurs(joueur, nb_joueurs, tour_joueur);
                 break;
                 case 2:
-                chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
                 chargement_coord_joueurs(joueur, &nb_joueurs);
                 chargement_barrieres(&compteur_barrieres, barrieres);
                 break;
@@ -47,7 +49,7 @@ int main() {
                 break;
                 case 4:
                     system("cls");
-                    afficher_scores();
+                    afficher_scores(joueur, nb_joueurs);
                 //Demande pour quitter ou non le jeu
                 retour = quitter_jeu();
                 break;
