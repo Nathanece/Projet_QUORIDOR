@@ -232,6 +232,10 @@ int menu_action(int tour_joueur, Players joueur[]) {
                "-3 Passer son tour\n"
                "-4 Annuler la derniere action\n");
         scanf(" %d", &action);
+        if (joueur[tour_joueur].barriere <= 0 && action == 2) {
+            printf("Vous n'avez plus de barrieres\n");
+            action = -1;
+        }
     } while (action < 1 || action > 4);
     return action;
 }

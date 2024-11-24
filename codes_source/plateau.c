@@ -131,6 +131,12 @@ void chargement_infos_joueurs(Players joueur[], int* nbjoueurs, int* tour_joueur
     fclose(fplateau);
 }
 
+//Reinitialisation des barrieres
+void reinitialisation_barriere(Barriere_plateau barriere[], int* compteur_barriere) {
+    //En mettant compteur_barriere à 0, on ne peux plus parcourir le tableau
+    *compteur_barriere = 0;
+}
+
 //Affichage du plateau
 void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, Barriere_plateau barriere[]) {
     int largeur_case = 4;

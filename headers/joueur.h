@@ -14,7 +14,7 @@ typedef struct {
 } Players; //Structures des joueurs
 
 void creation_joueurs(Players joueur[4], int *nb_joueurs);
-void reinitialisation_joueurs(Players joueur[], int nb_joueurs);
+void reinitialisation_coord_joueurs(Players joueur[], int nb_joueurs);
 void sauvegarder_scores(Players joueur[], int nb_joueurs);
 void charger_scores(Players joueur[], int nb_joueurs);
 void mettre_a_jour_scores(Players joueur[], int gagnant);

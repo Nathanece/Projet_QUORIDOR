@@ -56,11 +56,11 @@ int main() {
             }
         } while (retour);
         //Initalise fin à 0 avant de commencer à jouer
-        fin = 0;
         if (choix == 1 || choix == 2) {
             do{
                 continuer_partie = 0;
                 do {
+                    fin = 0;
                     //Sauvegarde des informations du jeu (positions, joueurs, ...)
                     sauvegarde_coord_joueurs(joueur, nb_joueurs);
                     sauvegarde_barrieres(compteur_barrieres, barrieres);
@@ -87,8 +87,13 @@ int main() {
                     verification_fin(joueur, nb_joueurs, &fin);
                 } while (fin == 0);
                 Sleep(3000);
-                //Reinitialisation des coordonnées des joueurs
-                reinitialisation_joueurs(joueur, nb_joueurs);
+                //Reinitialisation et sauvegarde des coordonnées des joueurs pour une prochaine partie
+                reinitialisation_coord_joueurs(joueur, nb_joueurs);
+                sauvegarde_coord_joueurs(joueur, nb_joueurs);
+
+                //Reinitialisation et sauvegarde des barrieres
+                reinitialisation_barriere(barrieres, &compteur_barrieres);
+                sauvegarde_barrieres(compteur_barrieres, barrieres);
 
                 sauvegarder_scores(joueur, nb_joueurs);
                 system("cls");

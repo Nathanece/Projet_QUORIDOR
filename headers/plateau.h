@@ -22,4 +22,7 @@ void affichage_plateau(int nb_joueurs, Players joueur[], int compteur_barriere, 
 void Color(int couleurDuTexte,int couleurDeFond);
 void gotoligcol(int lig, int col);
 
+//Reinitialisation des barrieres
+void reinitialisation_barriere(Barriere_plateau barriere[], int* compteur_barriere);
+
 #endif //PLATEAU_H

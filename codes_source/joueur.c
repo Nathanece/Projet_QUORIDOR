@@ -2,7 +2,7 @@
 #include <string.h>
 #include "../headers/joueur.h"
 
-void reinitialisation_joueurs(Players joueur[], int nb_joueurs) {
+void reinitialisation_coord_joueurs(Players joueur[], int nb_joueurs) {
     for (int i = 0; i < nb_joueurs; i++) {
         switch(i) {
             case 0:
@@ -25,6 +25,11 @@ void reinitialisation_joueurs(Players joueur[], int nb_joueurs) {
                 printf("Erreur veuillez relancer le programme");
             break;
         }
+        if (nb_joueurs < 2)
+            joueur[i].barriere = 10;
+        else
+            joueur[i].barriere = 5;
+
     }
 }
 
