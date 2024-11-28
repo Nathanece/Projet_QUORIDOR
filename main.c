@@ -35,10 +35,10 @@ int main() {
                 sauvegarde_info_joueurs(joueur, nb_joueurs, tour_joueur);
                 break;
                 case 2:
-                chargement_coord_joueurs(joueur, &nb_joueurs);
+                chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
                 chargement_barrieres(&compteur_barrieres, barrieres);
                 charger_scores(joueur, nb_joueurs);
-                chargement_infos_joueurs(joueur, &nb_joueurs, &tour_joueur);
+                chargement_coord_joueurs(joueur, &nb_joueurs);
                 break;
                 case 3:
                     system("cls");
@@ -69,8 +69,7 @@ int main() {
                     fin = 0;
                     quitter = 0;
                     //Sauvegarde des informations du jeu (positions, joueurs, ...)
-                    sauvegarde_coord_joueurs(joueur, nb_joueurs);
-                    sauvegarde_barrieres(compteur_barrieres, barrieres);
+
 
                     //Affichage du tableau
                     affichage_plateau(nb_joueurs, joueur, compteur_barrieres, barrieres);
@@ -95,6 +94,8 @@ int main() {
                             sauvegarde_barrieres(compteur_barrieres, barrieres);
                             sauvegarder_scores(joueur, nb_joueurs);
                         quitter = 1;
+                        default:
+                            break;
                     }
                     changement_tour(&tour_joueur, nb_joueurs);
                     verification_fin(joueur, nb_joueurs, &fin);

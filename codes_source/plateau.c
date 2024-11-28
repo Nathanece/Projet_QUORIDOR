@@ -107,10 +107,11 @@ void chargement_coord_joueurs(Players joueur[], int* nbjoueurs) {
     }
     //Lecture des informations et assignation des données à chaques joueurs
     for (int i = 0; i < *nbjoueurs; i++) {
-        fscanf(fplateau, "%d %d\n",
+        fscanf(fplateau, " %d %d\n",
         &joueur[i].coord_x, &joueur[i].coord_y);
     }
     fclose(fplateau);
+    printf("%d", *nbjoueurs);
 }
 
 //Chargement des informations des joueurs
